@@ -1,4 +1,4 @@
-package squat.model;
+package com.chestday.squat_droid.squat.model;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;

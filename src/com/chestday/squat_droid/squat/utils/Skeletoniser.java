@@ -1,4 +1,4 @@
-package squat.utils;
+package com.chestday.squat_droid.squat.utils;
 
 import org.opencv.core.Core;
 import org.opencv.core.Core.MinMaxLocResult;

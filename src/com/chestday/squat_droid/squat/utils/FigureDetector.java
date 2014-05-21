@@ -1,4 +1,4 @@
-package squat.utils;
+package com.chestday.squat_droid.squat.utils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
-package squat.tracking;
+package com.chestday.squat_droid.squat.tracking;
 
-import squat.utils.FixedQueue;
+import com.chestday.squat_droid.squat.utils.FixedQueue;
 
 public class SquatPhaseTracker {
 	private FixedQueue<Double> hipLocations;

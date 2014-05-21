@@ -1,4 +1,4 @@
-package squat.model;
+package com.chestday.squat_droid.squat.model;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -7,7 +7,7 @@ import org.opencv.core.RotatedRect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 
-import squat.utils.PointUtils;
+import com.chestday.squat_droid.squat.utils.PointUtils;
 
 public class AngularModel implements Model {
 	

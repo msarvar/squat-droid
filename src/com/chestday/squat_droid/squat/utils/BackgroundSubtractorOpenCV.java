@@ -1,4 +1,4 @@
-package squat.utils;
+package com.chestday.squat_droid.squat.utils;
 
 import org.opencv.core.Mat;
 import org.opencv.video.BackgroundSubtractorMOG;

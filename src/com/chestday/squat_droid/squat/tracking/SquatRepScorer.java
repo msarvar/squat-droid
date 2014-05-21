@@ -1,13 +1,13 @@
-package squat.tracking;
+package com.chestday.squat_droid.squat.tracking;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import squat.model.Model;
-import squat.model.event.ModelEventListener;
-import squat.model.event.ModelEventManager;
-import squat.model.event.ModelEventType;
-import squat.utils.Pair;
+import com.chestday.squat_droid.squat.model.Model;
+import com.chestday.squat_droid.squat.model.event.ModelEventListener;
+import com.chestday.squat_droid.squat.model.event.ModelEventManager;
+import com.chestday.squat_droid.squat.model.event.ModelEventType;
+import com.chestday.squat_droid.squat.utils.Pair;
 
 public class SquatRepScorer {
 	private SquatScorer scorer;

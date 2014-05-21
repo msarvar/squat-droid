@@ -1,10 +1,10 @@
-package squat.optimization;
+package com.chestday.squat_droid.squat.optimization;
 
 import org.apache.commons.math3.analysis.MultivariateFunction;
 import org.opencv.core.Mat;
 
-import squat.model.Model;
-import squat.utils.VideoTools;
+import com.chestday.squat_droid.squat.model.Model;
+import com.chestday.squat_droid.squat.utils.VideoTools;
 
 public class ModelFitFunction implements MultivariateFunction {
 

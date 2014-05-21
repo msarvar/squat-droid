@@ -1,10 +1,10 @@
-package squat.model.event;
+package com.chestday.squat_droid.squat.model.event;
 
 import java.util.List;
 
-import squat.model.Model;
-import squat.tracking.SquatPhaseTracker;
-import squat.utils.MultiMap;
+import com.chestday.squat_droid.squat.model.Model;
+import com.chestday.squat_droid.squat.tracking.SquatPhaseTracker;
+import com.chestday.squat_droid.squat.utils.MultiMap;
 
 public class ModelEventManager {
 	MultiMap<ModelEventType, ModelEventListener> listeners =

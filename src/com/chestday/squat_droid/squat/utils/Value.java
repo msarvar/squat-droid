@@ -1,4 +1,4 @@
-package squat.utils;
+package com.chestday.squat_droid.squat.utils;
 
 public class Value<T> {
 	private T value;

@@ -1,4 +1,4 @@
-package squat.optimization;
+package com.chestday.squat_droid.squat.optimization;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -13,9 +13,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.opencv.core.Mat;
-import squat.model.Model;
-import squat.utils.VideoDisplay;
-import squat.utils.VideoTools;
+import com.chestday.squat_droid.squat.model.Model;
+import com.chestday.squat_droid.squat.utils.VideoDisplay;
+import com.chestday.squat_droid.squat.utils.VideoTools;
 
 public class ModelFitterManual implements ModelFitter {
 

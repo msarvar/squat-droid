@@ -1,15 +1,15 @@
-package squat;
+package com.chestday.squat_droid.squat;
 
 import java.util.List;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
-import squat.tracking.SquatPipeline;
-import squat.tracking.SquatPipelineListener;
-import squat.utils.Pair;
-import squat.utils.VideoDisplay;
-import squat.utils.VideoInput;
+import com.chestday.squat_droid.squat.tracking.SquatPipeline;
+import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
+import com.chestday.squat_droid.squat.utils.Pair;
+import com.chestday.squat_droid.squat.utils.VideoDisplay;
+import com.chestday.squat_droid.squat.utils.VideoInput;
 
 public class Squat {
 

@@ -1,4 +1,4 @@
-package squat.tracking;
+package com.chestday.squat_droid.squat.tracking;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -8,20 +8,20 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
-import squat.model.AngularModel;
-import squat.model.Model;
-import squat.model.event.ModelEventListener;
-import squat.model.event.ModelEventManager;
-import squat.model.event.ModelEventType;
-import squat.optimization.ModelFitter;
-import squat.optimization.ModelInitialisationFitterOptim;
-import squat.utils.BackgroundSubtractor;
-import squat.utils.BackgroundSubtractorAdvanced;
-import squat.utils.BackgroundSubtractorNaive;
-import squat.utils.Value;
-import squat.utils.VideoDisplay;
-import squat.utils.VideoInput;
-import squat.utils.VideoTools;
+import com.chestday.squat_droid.squat.model.AngularModel;
+import com.chestday.squat_droid.squat.model.Model;
+import com.chestday.squat_droid.squat.model.event.ModelEventListener;
+import com.chestday.squat_droid.squat.model.event.ModelEventManager;
+import com.chestday.squat_droid.squat.model.event.ModelEventType;
+import com.chestday.squat_droid.squat.optimization.ModelFitter;
+import com.chestday.squat_droid.squat.optimization.ModelInitialisationFitterOptim;
+import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
+import com.chestday.squat_droid.squat.utils.BackgroundSubtractorAdvanced;
+import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaive;
+import com.chestday.squat_droid.squat.utils.Value;
+import com.chestday.squat_droid.squat.utils.VideoDisplay;
+import com.chestday.squat_droid.squat.utils.VideoInput;
+import com.chestday.squat_droid.squat.utils.VideoTools;
 
 public class SquatPipeline {
 	private static final int INIT_FITTING_ITERATIONS = 3;

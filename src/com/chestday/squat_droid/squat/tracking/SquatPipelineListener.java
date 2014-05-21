@@ -1,8 +1,8 @@
-package squat.tracking;
+package com.chestday.squat_droid.squat.tracking;
 
 import java.util.List;
 
-import squat.utils.Pair;
+import com.chestday.squat_droid.squat.utils.Pair;
 
 public interface SquatPipelineListener {
 	public void onReadyToSquat();

@@ -1,4 +1,4 @@
-package squat.utils;
+package com.chestday.squat_droid.squat.utils;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

@@ -1,16 +1,16 @@
-package squat.tracking;
+package com.chestday.squat_droid.squat.tracking;
 
 import java.util.List;
 
 import org.opencv.core.Mat;
 
-import squat.model.Model;
-import squat.model.event.ModelEventManager;
-import squat.optimization.ModelFitter;
-import squat.optimization.ModelFitterOptim;
-import squat.utils.BackgroundSubtractor;
-import squat.utils.FixedQueue;
-import squat.utils.Pair;
+import com.chestday.squat_droid.squat.model.Model;
+import com.chestday.squat_droid.squat.model.event.ModelEventManager;
+import com.chestday.squat_droid.squat.optimization.ModelFitter;
+import com.chestday.squat_droid.squat.optimization.ModelFitterOptim;
+import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
+import com.chestday.squat_droid.squat.utils.FixedQueue;
+import com.chestday.squat_droid.squat.utils.Pair;
 
 public class SquatTracker {
 	

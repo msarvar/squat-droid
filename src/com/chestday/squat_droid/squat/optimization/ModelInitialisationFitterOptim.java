@@ -1,4 +1,4 @@
-package squat.optimization;
+package com.chestday.squat_droid.squat.optimization;
 
 import org.apache.commons.math3.optim.InitialGuess;
 import org.apache.commons.math3.optim.MaxEval;
@@ -10,7 +10,7 @@ import org.apache.commons.math3.optim.nonlinear.scalar.ObjectiveFunction;
 import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.BOBYQAOptimizer;
 import org.opencv.core.Mat;
 
-import squat.model.Model;
+import com.chestday.squat_droid.squat.model.Model;
 
 public class ModelInitialisationFitterOptim implements ModelFitter {
 	public void fit(Model model, Mat frame) {

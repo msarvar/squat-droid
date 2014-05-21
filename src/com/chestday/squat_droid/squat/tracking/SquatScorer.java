@@ -1,12 +1,12 @@
-package squat.tracking;
+package com.chestday.squat_droid.squat.tracking;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import squat.model.Model;
-import squat.model.event.ModelEventListener;
-import squat.model.event.ModelEventManager;
-import squat.model.event.ModelEventType;
+import com.chestday.squat_droid.squat.model.Model;
+import com.chestday.squat_droid.squat.model.event.ModelEventListener;
+import com.chestday.squat_droid.squat.model.event.ModelEventManager;
+import com.chestday.squat_droid.squat.model.event.ModelEventType;
 
 public class SquatScorer {
 	private int frameCount = 0;

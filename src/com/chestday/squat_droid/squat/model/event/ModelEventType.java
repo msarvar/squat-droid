@@ -1,4 +1,4 @@
-package squat.model.event;
+package com.chestday.squat_droid.squat.model.event;
 
 public enum ModelEventType {
 	TICK,

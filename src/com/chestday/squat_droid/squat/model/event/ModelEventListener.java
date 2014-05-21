@@ -1,6 +1,6 @@
-package squat.model.event;
+package com.chestday.squat_droid.squat.model.event;
 
-import squat.model.Model;
+import com.chestday.squat_droid.squat.model.Model;
 
 public interface ModelEventListener {
 	public void onEvent(Model m);
