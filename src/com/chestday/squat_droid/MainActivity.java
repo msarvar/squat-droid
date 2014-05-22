@@ -13,6 +13,7 @@ import com.chestday.squat_droid.squat.utils.Pair;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoDisplayAndroid;
 import com.chestday.squat_droid.squat.utils.VideoInput;
+import com.chestday.squat_droid.squat.utils.VideoInputCamera;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -41,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
 	};
 	
 	private void start() {
-		VideoInput videoInput = new VideoInput(name, true);
+		VideoInput videoInput = new VideoInputCamera();
 
 		VideoDisplay videoDisplay = new VideoDisplayAndroid((ImageView)findViewById(R.id.squatImageView));
 		
