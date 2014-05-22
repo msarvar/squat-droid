@@ -1,6 +1,7 @@
 package com.chestday.squat_droid.squat.utils.android;
 
 import org.opencv.android.Utils;
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
 import wseemann.media.FFmpegMediaMetadataRetriever;
@@ -34,6 +35,7 @@ public class VideoInputFile implements VideoInput {
 		position += 100000;
 		Mat m = new Mat();
 		Utils.bitmapToMat(bmp, m);
+		Core.flip(m.t(), m, 1);
 		return m;
 	}
 
