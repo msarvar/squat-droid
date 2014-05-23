@@ -35,7 +35,6 @@ public class VideoDisplayAndroid implements VideoDisplay {
 			@Override
 			public void run() {
 				imageView.setImageBitmap(bm);
-				System.out.println("Drawing frame");
 			}
 		});
 		

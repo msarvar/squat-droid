@@ -1,13 +1,14 @@
 package com.chestday.squat_droid;
 
+import java.util.List;
+
 import org.opencv.core.Mat;
 
-import android.widget.ImageView;
-
+import com.chestday.squat_droid.squat.tracking.SquatPipeline;
+import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
+import com.chestday.squat_droid.squat.utils.Pair;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
-import com.chestday.squat_droid.squat.utils.android.VideoDisplayAndroid;
-import com.chestday.squat_droid.squat.utils.android.VideoInputFile;
 
 public class SquatMainThread extends Thread {
 
@@ -22,24 +23,24 @@ public class SquatMainThread extends Thread {
 	
 	public void run() {
 
-//		SquatPipeline squatPipeline = new SquatPipeline(videoInput, videoDisplay, new SquatPipelineListener() {
-//			public void onReadyToSquat() {
-//				System.out.println("Ready to Squat!");
-//			}
-//
-//			public void onInitialModelFit() {
-//				System.out.println("Initial Model Fitted");
-//			}
-//
-//			public void onSquatsComplete(List<Pair<Double, String>> scores) {
-//				System.out.println("Reps: " + scores.size());
-//				for(int i = 0; i < scores.size(); i++) {
-//					System.out.println("Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
-//				}
-//			}
-//		});
-//		
-//		squatPipeline.process();
+		SquatPipeline squatPipeline = new SquatPipeline(videoInput, videoDisplay, new SquatPipelineListener() {
+			public void onReadyToSquat() {
+				System.out.println("Ready to Squat!");
+			}
+
+			public void onInitialModelFit() {
+				System.out.println("Initial Model Fitted");
+			}
+
+			public void onSquatsComplete(List<Pair<Double, String>> scores) {
+				System.out.println("Reps: " + scores.size());
+				for(int i = 0; i < scores.size(); i++) {
+					System.out.println("Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
+				}
+			}
+		});
+		
+		squatPipeline.process();
 		
 		// Cycle through the last few frames
 		int i = 0;
