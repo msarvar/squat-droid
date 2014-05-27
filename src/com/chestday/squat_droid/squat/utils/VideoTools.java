@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
@@ -52,6 +53,9 @@ public class VideoTools {
 	
 	public static MatOfPoint largestObject(Mat frame) {
 		List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+		System.out.println("Largest object type: " + frame.type());
+		frame.convertTo(frame, CvType.CV_8UC3);
+		System.out.println("Largest object type: " + frame.type());
 		Imgproc.findContours(frame, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 		
 		if(contours.isEmpty()) {

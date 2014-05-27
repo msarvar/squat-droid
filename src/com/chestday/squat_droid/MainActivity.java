@@ -3,6 +3,9 @@ package com.chestday.squat_droid;
 import java.util.List;
 
 import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
@@ -12,6 +15,8 @@ import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
 import com.chestday.squat_droid.squat.utils.Pair;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
+import com.chestday.squat_droid.squat.utils.android.VideoBridge;
+import com.chestday.squat_droid.squat.utils.android.VideoBridge.VideoBridgeReadyCallback;
 import com.chestday.squat_droid.squat.utils.android.VideoDisplayAndroid;
 import com.chestday.squat_droid.squat.utils.android.VideoInputCamera;
 import com.chestday.squat_droid.squat.utils.android.VideoInputDummy;
@@ -24,6 +29,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
@@ -31,11 +37,14 @@ import android.widget.ImageView;
 
 public class MainActivity extends ActionBarActivity {
 
+	private CameraBridgeViewBase mOpenCvCameraView;
+	
 	private BaseLoaderCallback loaderCallback = new BaseLoaderCallback(this) {
 		@Override
         public void onManagerConnected(int status) {
             if (status == LoaderCallbackInterface.SUCCESS ) {
                 // now we can call opencv code !
+            	
                 start();
             } else {
                 super.onManagerConnected(status);
@@ -44,16 +53,33 @@ public class MainActivity extends ActionBarActivity {
 	};
 	
 	private void start() {
-		ImageView imageView = (ImageView)findViewById(R.id.squatImageView);
 		
+		mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.camera_view_wow);
+		mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+		
+		VideoBridge videoBridge = new VideoBridge();
+		final SquatMainThread squat = new SquatMainThread(videoBridge, videoBridge);
+		
+		videoBridge.setReadyCallback(new VideoBridgeReadyCallback() {
+			
+			@Override
+			public void start() {
+				// TODO Auto-generated method stub
+				squat.start();
+			}
+		});
+		
+		mOpenCvCameraView.setCvCameraViewListener(videoBridge);
+        
+        mOpenCvCameraView.enableView();
+
+        
+        
 		//VideoInput videoInput = new VideoInputCamera();
-		VideoInput videoInput = new VideoInputFile("/storage/extSdCard/Video/Squat/good_squats.avi");
+		//VideoInput videoInput = new VideoInputFile("/storage/extSdCard/Video/Squat/good_squats.avi");
 		//VideoInput videoInput = new VideoInputDummy(imageView.getWidth(),imageView.getHeight());
 
-		VideoDisplay videoDisplay = new VideoDisplayAndroid(this, imageView);
 		
-		SquatMainThread squat = new SquatMainThread(videoInput, videoDisplay);
-		squat.start();
 	}
 	
 	@Override
@@ -65,7 +91,7 @@ public class MainActivity extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
-		
+
 		OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_5, this, loaderCallback);
 	}
 

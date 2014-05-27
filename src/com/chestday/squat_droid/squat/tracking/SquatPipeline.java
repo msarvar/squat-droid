@@ -45,7 +45,7 @@ public class SquatPipeline {
 		
 		//VideoDisplay debugDisplay = new VideoDisplay("Debug", videoInput.getWidth(), videoInput.getHeight());
 		
-		BackgroundSubtractor bg = new BackgroundSubtractorAdvanced(firstFrame, 30);
+		BackgroundSubtractor bg = new BackgroundSubtractorNaive(firstFrame, 30);
 		
 		SquatSetup squatSetup = new SquatSetup(bg, firstFrame);
 		Mat readyFrame = new Mat();

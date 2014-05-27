@@ -8,12 +8,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.chestday.squat_droid.MainActivity$PlaceholderFragment" >
-
-    <ImageView
-        android:id="@+id/squatImageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_launcher" />
+    
+     <org.opencv.android.JavaCameraView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone"
+        android:id="@+id/camera_view_wow"/>
 
 </FrameLayout>
