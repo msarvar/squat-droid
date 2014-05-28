@@ -62,24 +62,43 @@ protected boolean initializeCamera(int width, int height) {
     synchronized (this) {
         mCamera = null;
 
-        boolean connected = false;
-        int numberOfCameras = android.hardware.Camera.getNumberOfCameras();
-        android.hardware.Camera.CameraInfo cameraInfo = new android.hardware.Camera.CameraInfo();
-        for (int i = 0; i < numberOfCameras; i++) {
-            android.hardware.Camera.getCameraInfo(i, cameraInfo);
-            if (cameraInfo.facing == android.hardware.Camera.CameraInfo.CAMERA_FACING_BACK) {
-                try {
-                    mCamera = Camera.open(i);
-                    mCameraId = i;
-                    connected = true;
-                } catch (RuntimeException e) {
-                    Log.e(TAG, "Camera #" + i + "failed to open: " + e.getMessage());
+        mCamera = null;
+
+        if (mCameraIndex == -1) {
+            Log.d(TAG, "Trying to open camera with old open()");
+            try {
+                mCamera = Camera.open();
+            }
+            catch (Exception e){
+                Log.e(TAG, "Camera is not available (in use or does not exist): " + e.getLocalizedMessage());
+            }
+
+            if(mCamera == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+                boolean connected = false;
+                for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); ++camIdx) {
+                    Log.d(TAG, "Trying to open camera with new open(" + Integer.valueOf(camIdx) + ")");
+                    try {
+                        mCamera = Camera.open(camIdx);
+                        connected = true;
+                    } catch (RuntimeException e) {
+                        Log.e(TAG, "Camera #" + camIdx + "failed to open: " + e.getLocalizedMessage());
+                    }
+                    if (connected) break;
                 }
-                if (connected) break;
+            }
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+                Log.d(TAG, "Trying to open camera with new open(" + Integer.valueOf(mCameraIndex) + ")");
+                try {
+                    mCamera = Camera.open(mCameraIndex);
+                } catch (RuntimeException e) {
+                    Log.e(TAG, "Camera #" + mCameraIndex + "failed to open: " + e.getLocalizedMessage());
+                }
             }
         }
 
-        if (mCamera == null) return false;
+        if (mCamera == null)
+            return false;
 
         /* Now set camera parameters */
         try {
@@ -254,6 +273,7 @@ private class JavaCameraFrame implements CvCameraViewFrame {
         if (mRotated != null) mRotated.release();
         mRotated = mRgba.t();
         Core.flip(mRotated, mRotated, 1);
+        Core.flip(mRotated, mRotated, 0);
         return mRotated;
     }
 

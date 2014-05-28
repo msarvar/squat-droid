@@ -15,7 +15,7 @@
         android:layout_height="fill_parent"
         android:visibility="gone"
         android:id="@+id/camera_view_wow"
-        opencv:camera_id="back"
+        opencv:camera_id="front"
         opencv:show_fps="true" />
 
 </FrameLayout>

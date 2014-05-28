@@ -80,7 +80,7 @@ public class SquatPipeline {
 		Point figureCentre = new Point(figureBound.x + figureBound.width / 2, figureBound.y + figureBound.height / 2);
 		
 		// Initialise the model in a sensible location
-		AngularModel model = new AngularModel(figureCentre.x - figureBound.width / 2, figureCentre.y + figureHeight / 2);
+		AngularModel model = new AngularModel(figureCentre.x + figureBound.width / 2, figureCentre.y + figureHeight / 2);
 		Mat modelScaleMat = new Mat(readyForeground.size(), readyForeground.type());
 		model.draw(modelScaleMat);
 		
