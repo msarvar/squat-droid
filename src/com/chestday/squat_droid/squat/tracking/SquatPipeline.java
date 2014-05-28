@@ -18,6 +18,7 @@ import com.chestday.squat_droid.squat.optimization.ModelInitialisationFitterOpti
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorAdvanced;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaive;
+import com.chestday.squat_droid.squat.utils.MotionDetector;
 import com.chestday.squat_droid.squat.utils.Value;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
@@ -38,6 +39,13 @@ public class SquatPipeline {
 	public void process() {
 		final Scalar modelColour = new Scalar(255,255,255);
 
+		// Dump the first 10 frames as it's all a bit messed up at the start
+		int frameDumpCount = 0;
+		while(frameDumpCount < 10 && videoInput.hasNextFrame()) {
+			videoInput.getNextFrame();
+			frameDumpCount++;
+		}
+		
 		Mat firstFrame = new Mat();
 		if(videoInput.hasNextFrame()) {
 			firstFrame = videoInput.getNextFrame();
