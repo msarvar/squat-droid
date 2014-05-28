@@ -17,6 +17,7 @@ import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
 import com.chestday.squat_droid.squat.utils.android.VideoBridge;
 import com.chestday.squat_droid.squat.utils.android.VideoBridge.VideoBridgeReadyCallback;
+import com.chestday.squat_droid.squat.utils.android.PortraitJavaCameraView;
 import com.chestday.squat_droid.squat.utils.android.VideoDisplayAndroid;
 import com.chestday.squat_droid.squat.utils.android.VideoInputCamera;
 import com.chestday.squat_droid.squat.utils.android.VideoInputDummy;
@@ -71,11 +72,9 @@ public class MainActivity extends ActionBarActivity {
 		});
 		
 		mOpenCvCameraView.setCvCameraViewListener(videoBridge);
-        
+
         mOpenCvCameraView.enableView();
 
-        
-        
 		//VideoInput videoInput = new VideoInputCamera();
 		//VideoInput videoInput = new VideoInputFile("/storage/extSdCard/Video/Squat/good_squats.avi");
 		//VideoInput videoInput = new VideoInputDummy(imageView.getWidth(),imageView.getHeight());

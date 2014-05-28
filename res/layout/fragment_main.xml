@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.chestday.squat_droid.MainActivity$PlaceholderFragment" >
     
-     <org.opencv.android.JavaCameraView
+     <com.chestday.squat_droid.squat.utils.android.PortraitCameraView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:visibility="gone"
