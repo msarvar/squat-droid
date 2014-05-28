@@ -25,17 +25,17 @@ public class SquatMainThread extends Thread {
 
 		SquatPipeline squatPipeline = new SquatPipeline(videoInput, videoDisplay, new SquatPipelineListener() {
 			public void onReadyToSquat() {
-				System.out.println("Ready to Squat!");
+				System.out.println("SQUAT: Ready to Squat!");
 			}
 
 			public void onInitialModelFit() {
-				System.out.println("Initial Model Fitted");
+				System.out.println("SQUAT: Initial Model Fitted");
 			}
 
 			public void onSquatsComplete(List<Pair<Double, String>> scores) {
-				System.out.println("Reps: " + scores.size());
+				System.out.println("SQUAT: Reps: " + scores.size());
 				for(int i = 0; i < scores.size(); i++) {
-					System.out.println("Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
+					System.out.println("SQUAT: Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
 				}
 			}
 		});
