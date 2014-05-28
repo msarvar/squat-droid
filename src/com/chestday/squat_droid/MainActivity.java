@@ -17,7 +17,6 @@ import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
 import com.chestday.squat_droid.squat.utils.android.VideoBridge;
 import com.chestday.squat_droid.squat.utils.android.VideoBridge.VideoBridgeReadyCallback;
-import com.chestday.squat_droid.squat.utils.android.PortraitJavaCameraView;
 import com.chestday.squat_droid.squat.utils.android.VideoDisplayAndroid;
 import com.chestday.squat_droid.squat.utils.android.VideoInputCamera;
 import com.chestday.squat_droid.squat.utils.android.VideoInputDummy;
