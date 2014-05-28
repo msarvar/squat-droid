@@ -9,6 +9,7 @@ import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
+import com.chestday.squat_droid.squat.utils.BlockingQueue;
 import com.chestday.squat_droid.squat.utils.FixedQueue;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
@@ -36,14 +37,25 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	public boolean hasNextFrame() {
 		// TODO Auto-generated method stub
 		//System.out.println("Do we have a frame? " + inputFrame != null ? "Yes" : "No");
-		return inputFrame != null;
+		return true;
 	}
 
 	@Override
-	public Mat getNextFrame() {
+	public synchronized Mat getNextFrame() {
 		// TODO Auto-generated method stub
 		//System.out.println("Asked for frame");
-		return inputFrame;
+		
+		while(inputFrame == null) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		Mat inputFrameRef = inputFrame;
+		inputFrame = null;
+		return inputFrameRef;
 	}
 
 	@Override
@@ -101,12 +113,16 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 		System.gc();
 		
 		// TODO Auto-generated method stub
-		System.out.println("Got a frame!");
-		System.out.println("Type: ::: " + inputFrame.rgba().type());
-		Mat m = inputFrame.rgba().clone();
+		//System.out.println("Got a frame!");
+		//System.out.println("Type: ::: " + inputFrame.rgba().type());
+		Mat m = new Mat();
 		
-		this.inputFrame.release();
-		m.convertTo(this.inputFrame, CvType.CV_8UC1);
+		inputFrame.rgba().convertTo(m, CvType.CV_8UC1);
+		
+		synchronized (this) {
+			this.inputFrame = m;
+			notify();
+		}
 		
 		Mat out = new Mat();
 		this.outputFrame.convertTo(out, 24);
