@@ -104,7 +104,6 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 		System.out.println("Got a frame!");
 		System.out.println("Type: ::: " + inputFrame.rgba().type());
 		Mat m = inputFrame.rgba().clone();
-		//m = VideoTools.rotate90AndScale(m);
 		
 		this.inputFrame.release();
 		m.convertTo(this.inputFrame, CvType.CV_8UC1);
