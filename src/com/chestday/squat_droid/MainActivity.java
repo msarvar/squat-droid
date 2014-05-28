@@ -15,6 +15,7 @@ import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
 import com.chestday.squat_droid.squat.utils.Pair;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
+import com.chestday.squat_droid.squat.utils.android.PortraitCameraView;
 import com.chestday.squat_droid.squat.utils.android.VideoBridge;
 import com.chestday.squat_droid.squat.utils.android.VideoBridge.VideoBridgeReadyCallback;
 import com.chestday.squat_droid.squat.utils.android.VideoDisplayAndroid;
@@ -59,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
 		mOpenCvCameraView.setMaxFrameSize(240, 300);
 		
 		VideoBridge videoBridge = new VideoBridge();
-		final SquatMainThread squat = new SquatMainThread(videoBridge, videoBridge);
+		final SquatMainThread squat = new SquatMainThread(videoBridge, videoBridge, (PortraitCameraView)mOpenCvCameraView);
 		
 		videoBridge.setReadyCallback(new VideoBridgeReadyCallback() {
 			

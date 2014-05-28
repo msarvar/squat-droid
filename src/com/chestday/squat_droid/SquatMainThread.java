@@ -9,21 +9,30 @@ import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
 import com.chestday.squat_droid.squat.utils.Pair;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
+import com.chestday.squat_droid.squat.utils.android.PortraitCameraView;
 
 public class SquatMainThread extends Thread {
 
 	private VideoInput videoInput;
 	private VideoDisplay videoDisplay;
+	private PortraitCameraView cameraView;
 	
-	public SquatMainThread(VideoInput videoInput, VideoDisplay videoDisplay) {
+	public SquatMainThread(VideoInput videoInput, VideoDisplay videoDisplay, PortraitCameraView cameraView) {
 		super();
 		this.videoInput = videoInput;
 		this.videoDisplay = videoDisplay;
+		this.cameraView = cameraView;
 	}
 	
 	public void run() {
 
 		SquatPipeline squatPipeline = new SquatPipeline(videoInput, videoDisplay, new SquatPipelineListener() {
+			public void onStart() {
+				System.out.println("SQUAT: Start Pipeline");
+				// Lock the exposure and white balance
+				cameraView.fixExposureAndWhiteBalance();
+			}
+			
 			public void onReadyToSquat() {
 				System.out.println("SQUAT: Ready to Squat!");
 			}

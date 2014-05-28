@@ -118,11 +118,11 @@ protected boolean initializeCamera(int width, int height) {
                     //params.setRecordingHint(true);
 
                 List<String> FocusModes = params.getSupportedFocusModes();
-                if (FocusModes != null && FocusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO))
+                if (FocusModes != null && FocusModes.contains(Camera.Parameters.FOCUS_MODE_FIXED))
                 {
-                    params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+                    params.setFocusMode(Camera.Parameters.FOCUS_MODE_FIXED);
                 }
-
+                
                 mCamera.setParameters(params);
                 params = mCamera.getParameters();
 
@@ -251,6 +251,13 @@ public void onPreviewFrame(byte[] frame, Camera arg1) {
     }
     if (mCamera != null)
         mCamera.addCallbackBuffer(mBuffer);
+}
+
+public void fixExposureAndWhiteBalance() {
+	Camera.Parameters params = mCamera.getParameters();
+	params.setAutoExposureLock(true);
+    params.setAutoWhiteBalanceLock(true);
+    mCamera.setParameters(params);
 }
 
 private class JavaCameraFrame implements CvCameraViewFrame {
