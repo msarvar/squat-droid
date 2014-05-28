@@ -26,6 +26,7 @@ public class SquatSetup {
 		Mat foreground = bg.subtract(frame);
 		
 		if(figureDetector.hasFigure(foreground)) {
+			System.out.println("SQUAT: has figure somehow?");
 			ready = motionDetector.stationary(foreground);
 		}
 	}
