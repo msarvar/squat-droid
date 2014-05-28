@@ -12,6 +12,7 @@ import org.opencv.core.Mat;
 import com.chestday.squat_droid.squat.utils.FixedQueue;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
+import com.chestday.squat_droid.squat.utils.VideoTools;
 
 public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListener2 {
 
@@ -103,6 +104,8 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 		System.out.println("Got a frame!");
 		System.out.println("Type: ::: " + inputFrame.rgba().type());
 		Mat m = inputFrame.rgba().clone();
+		//m = VideoTools.rotate90AndScale(m);
+		
 		this.inputFrame.release();
 		m.convertTo(this.inputFrame, CvType.CV_8UC1);
 		

@@ -102,4 +102,16 @@ public class VideoTools {
 		Imgproc.warpAffine(frame, rotated, r, new Size(frame.rows(), frame.cols()));
 		return rotated;
 	}
+	
+	public static Mat rotate90AndScale(Mat frame) {
+		Mat m = rotate90(frame);
+		Imgproc.resize(m, m, frame.size());
+		return m;
+	}
+	
+	public static Mat rotate90(Mat frame) {
+		Mat m = frame.t();
+		Core.flip(frame.t(), m, 1);
+		return m;
+	}
 }

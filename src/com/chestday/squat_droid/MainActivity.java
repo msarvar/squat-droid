@@ -56,6 +56,7 @@ public class MainActivity extends ActionBarActivity {
 		
 		mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.camera_view_wow);
 		mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+		mOpenCvCameraView.setMaxFrameSize(240, 300);
 		
 		VideoBridge videoBridge = new VideoBridge();
 		final SquatMainThread squat = new SquatMainThread(videoBridge, videoBridge);
