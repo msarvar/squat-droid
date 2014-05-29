@@ -4,15 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.chestday.squat_droid.MainActivity$PlaceholderFragment" >
 
     <com.chestday.squat_droid.squat.utils.android.PortraitCameraView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:adjustViewBounds="true"
         android:visibility="gone"
         android:id="@+id/camera_view_wow"
         opencv:camera_id="front"
