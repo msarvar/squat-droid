@@ -39,15 +39,6 @@ public class SquatPipeline {
 	
 	public void process() {
 		final Scalar modelColour = new Scalar(255,255,255);
-
-		// Dump the first few frames to ensure that we get a good white balance/exposure before fixing
-		int frameDumpCount = 0;
-		while(frameDumpCount < 10 && videoInput.hasNextFrame()) {
-			videoInput.getNextFrame();
-			frameDumpCount++;
-		}
-		
-		listener.onStart();
 		
 		Mat firstFrame = new Mat();
 		if(videoInput.hasNextFrame()) {

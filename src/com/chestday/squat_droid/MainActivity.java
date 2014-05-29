@@ -37,6 +37,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +45,8 @@ public class MainActivity extends ActionBarActivity {
 
 	private PortraitCameraView mOpenCvCameraView;
 	private TextView mainTextView;
+	private Button startButton;
+	private boolean startButtonPressed = false;
 	
 	private BaseLoaderCallback loaderCallback = new BaseLoaderCallback(this) {
 		@Override
@@ -68,15 +71,42 @@ public class MainActivity extends ActionBarActivity {
 		mainTextView = (TextView)findViewById(R.id.main_text);
 		mainTextView.setTextColor(Color.WHITE);
 		
+		startButton = (Button)findViewById(R.id.start_button);
+		startButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startButtonPressed = true;
+			}
+		});
+		
 		final ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
 		
 		VideoBridge videoBridge = new VideoBridge();
+		
 		final SquatMainThread squat = new SquatMainThread(videoBridge, videoBridge, new SquatPipelineListener() {
-			public void onStart() {
+			public void onTimeToFixCameraSettings() {
 				System.out.println("SQUAT: Start Pipeline");
 				// Lock the exposure and white balance
 				mOpenCvCameraView.fixExposureAndWhiteBalance();
 				
+				setMainText("Wait for still surroundings");
+			}
+			
+			@Override
+			public boolean isStartButtonPressed() {
+				
+				return startButtonPressed;
+			}
+
+			@Override
+			public void onBackgroundStationary(boolean isStationary) {
+				setMainText(isStationary ? "Press Start" : "Please ensure surroundings are still");
+				setStartButtonEnabled(isStationary);
+			}
+			
+			public void onStart() {
 				setMainText("Walk into view");
 			}
 			
@@ -121,8 +151,6 @@ public class MainActivity extends ActionBarActivity {
 					System.out.println("SQUAT: Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
 				}
 			}
-
-			
 		});
 		
 		videoBridge.setReadyCallback(new VideoBridgeReadyCallback() {
@@ -151,6 +179,18 @@ public class MainActivity extends ActionBarActivity {
 			public void run() {
 				// TODO Auto-generated method stub
 				mainTextView.setText(text);
+			}
+		});
+	}
+	
+	private void setStartButtonEnabled(final boolean enabled) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if(startButton.isEnabled() != enabled) {
+					startButton.setEnabled(enabled);
+				}
 			}
 		});
 	}

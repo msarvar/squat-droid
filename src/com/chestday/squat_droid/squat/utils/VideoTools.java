@@ -114,4 +114,9 @@ public class VideoTools {
 		Core.flip(frame.t(), m, 1);
 		return m;
 	}
+	
+	public static double percentageNonZero(Mat frame) {
+		int nonZeroPixels = Core.countNonZero(frame);
+		return (double)nonZeroPixels / (frame.cols() * frame.rows()) * 100;
+	}
 }

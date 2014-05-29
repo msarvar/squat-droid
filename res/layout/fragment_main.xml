@@ -12,15 +12,22 @@
         android:adjustViewBounds="true"
         android:visibility="gone"
         android:id="@+id/camera_view"
-        opencv:camera_id="front"
-        opencv:show_fps="true" />
+        opencv:camera_id="front" />
     
     <TextView
         android:id="@+id/main_text"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_gravity="bottom"
+        android:layout_gravity="top"
         android:text="@string/empty"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:enabled="false"
+        android:text="Start!" />
 
 </FrameLayout>

@@ -13,4 +13,7 @@ public interface SquatPipelineListener {
 	public void squatSetupNotHasFigure();
 	public void onMotionDetectorValue(double difference);
 	public void onSquatBelowParallel();
+	public void onTimeToFixCameraSettings();
+	public boolean isStartButtonPressed();
+	public void onBackgroundStationary(boolean isStationary);
 }
