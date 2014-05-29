@@ -14,14 +14,36 @@
         android:id="@+id/camera_view"
         opencv:camera_id="front" />
     
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical">
+		
     <TextView
         android:id="@+id/main_text"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_gravity="top"
         android:text="@string/empty"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
 
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/scores_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/empty"
+            android:textColor="@color/white">
+        </TextView>
+    </ScrollView>
+    
     <Button
         android:id="@+id/start_button"
         android:layout_width="match_parent"
@@ -29,5 +51,6 @@
         android:layout_gravity="bottom"
         android:enabled="false"
         android:text="Start" />
+    </LinearLayout>
 
 </FrameLayout>

@@ -48,6 +48,7 @@ public class MainActivity extends ActionBarActivity {
 	private ToneGenerator toneGenerator;
 	private PortraitCameraView mOpenCvCameraView;
 	private TextView mainTextView;
+	private TextView scoresTextView;
 	private Button startButton;
 	private boolean startButtonPressed = false;
 	
@@ -71,7 +72,8 @@ public class MainActivity extends ActionBarActivity {
 		mOpenCvCameraView.setMaxFrameSize(176, 152);
 		
 		mainTextView = (TextView)findViewById(R.id.main_text);
-		mainTextView.setTextColor(Color.WHITE);
+		
+		scoresTextView = (TextView)findViewById(R.id.scores_text);
 		
 		startButton = (Button)findViewById(R.id.start_button);
 		startButton.setOnClickListener(new View.OnClickListener() {
@@ -173,12 +175,18 @@ public class MainActivity extends ActionBarActivity {
 
 			public void onSquatsComplete(List<Pair<Double, String>> scores) {
 				setText(mainTextView, "Finished, press Reset to squat again");
-				System.out.println("SQUAT: Reps: " + scores.size());
+				
+				String scoreString = "\n";
+				
 				for(int i = 0; i < scores.size(); i++) {
-					System.out.println("SQUAT: Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
+					String scorePercentage = String.format("%.1f", scores.get(i).l);
+					scoreString += "Rep " + (i+1) + " {Score: " + scorePercentage + "%, Problem: " + scores.get(i).r + "}\n";
 				}
 				
+				setText(scoresTextView, scoreString);
+				
 				setText(startButton, "Reset");
+				
 				setStartButtonEnabled(true);
 			}
 			
@@ -203,6 +211,7 @@ public class MainActivity extends ActionBarActivity {
 				
 				squat = makeSquatMainThread();
 				setText(startButton, "Start");
+				setText(scoresTextView, "");
 				squat.start();
 			}
 		});
