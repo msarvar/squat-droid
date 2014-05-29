@@ -57,7 +57,7 @@ public class SquatPipeline {
 		
 		BackgroundSubtractor bg = new BackgroundSubtractorNaive(firstFrame, 30);
 		
-		SquatSetup squatSetup = new SquatSetup(bg, firstFrame);
+		SquatSetup squatSetup = new SquatSetup(bg, firstFrame, listener);
 		Mat readyFrame = new Mat();
 		while(!squatSetup.ready() && videoInput.hasNextFrame()) {
 			readyFrame = videoInput.getNextFrame();

@@ -15,39 +15,18 @@ public class SquatMainThread extends Thread {
 
 	private VideoInput videoInput;
 	private VideoDisplay videoDisplay;
-	private PortraitCameraView cameraView;
+	private SquatPipelineListener listener;
 	
-	public SquatMainThread(VideoInput videoInput, VideoDisplay videoDisplay, PortraitCameraView cameraView) {
+	public SquatMainThread(VideoInput videoInput, VideoDisplay videoDisplay, SquatPipelineListener listener) {
 		super();
 		this.videoInput = videoInput;
 		this.videoDisplay = videoDisplay;
-		this.cameraView = cameraView;
+		this.listener = listener;
 	}
 	
 	public void run() {
 
-		SquatPipeline squatPipeline = new SquatPipeline(videoInput, videoDisplay, new SquatPipelineListener() {
-			public void onStart() {
-				System.out.println("SQUAT: Start Pipeline");
-				// Lock the exposure and white balance
-				cameraView.fixExposureAndWhiteBalance();
-			}
-			
-			public void onReadyToSquat() {
-				System.out.println("SQUAT: Ready to Squat!");
-			}
-
-			public void onInitialModelFit() {
-				System.out.println("SQUAT: Initial Model Fitted");
-			}
-
-			public void onSquatsComplete(List<Pair<Double, String>> scores) {
-				System.out.println("SQUAT: Reps: " + scores.size());
-				for(int i = 0; i < scores.size(); i++) {
-					System.out.println("SQUAT: Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
-				}
-			}
-		});
+		SquatPipeline squatPipeline = new SquatPipeline(videoInput, videoDisplay, listener);
 		
 		squatPipeline.process();
 		

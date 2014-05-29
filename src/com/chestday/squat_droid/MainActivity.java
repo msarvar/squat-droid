@@ -26,6 +26,7 @@ import com.chestday.squat_droid.squat.utils.android.VideoInputFile;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,10 +36,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
-	private CameraBridgeViewBase mOpenCvCameraView;
+	private PortraitCameraView mOpenCvCameraView;
+	private TextView mainTextView;
 	
 	private BaseLoaderCallback loaderCallback = new BaseLoaderCallback(this) {
 		@Override
@@ -55,12 +58,53 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void start() {
 		
-		mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.camera_view_wow);
+		mOpenCvCameraView = (PortraitCameraView) findViewById(R.id.camera_view_wow);
 		mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
 		mOpenCvCameraView.setMaxFrameSize(240, 300);
 		
+		mainTextView = (TextView)findViewById(R.id.main_text);
+		mainTextView.setTextColor(Color.WHITE);
+		
 		VideoBridge videoBridge = new VideoBridge();
-		final SquatMainThread squat = new SquatMainThread(videoBridge, videoBridge, (PortraitCameraView)mOpenCvCameraView);
+		final SquatMainThread squat = new SquatMainThread(videoBridge, videoBridge, new SquatPipelineListener() {
+			public void onStart() {
+				System.out.println("SQUAT: Start Pipeline");
+				// Lock the exposure and white balance
+				mOpenCvCameraView.fixExposureAndWhiteBalance();
+				
+				setMainText("Walk into view");
+			}
+			
+			@Override
+			public void squatSetupHasFigure() {
+				// TODO Auto-generated method stub
+				setMainText("Found figure, stand still");
+			}
+
+			@Override
+			public void squatSetupNotHasFigure() {
+				// TODO Auto-generated method stub
+				setMainText("Walk into view");
+			}
+			
+			public void onReadyToSquat() {
+				System.out.println("SQUAT: Ready to Squat!");
+				
+			}
+
+			public void onInitialModelFit() {
+				System.out.println("SQUAT: Initial Model Fitted");
+				setMainText("Begin Squatting");
+			}
+
+			public void onSquatsComplete(List<Pair<Double, String>> scores) {
+				setMainText("Finished. Reps: " + scores.size());
+				System.out.println("SQUAT: Reps: " + scores.size());
+				for(int i = 0; i < scores.size(); i++) {
+					System.out.println("SQUAT: Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
+				}
+			}
+		});
 		
 		videoBridge.setReadyCallback(new VideoBridgeReadyCallback() {
 			
@@ -80,6 +124,16 @@ public class MainActivity extends ActionBarActivity {
 		//VideoInput videoInput = new VideoInputDummy(imageView.getWidth(),imageView.getHeight());
 
 		
+	}
+	
+	private void setMainText(final String text) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				mainTextView.setText(text);
+			}
+		});
 	}
 	
 	@Override
