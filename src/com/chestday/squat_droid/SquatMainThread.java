@@ -63,6 +63,8 @@ public class SquatMainThread extends Thread {
 		// Cycle through frames until we press reset
 		while(!listener.isStartButtonPressed() && videoInput.hasNextFrame()) {
 			Mat frame = videoInput.getNextFrame();
+			// Darken the frame to show the scores better
+			frame.convertTo(frame, frame.type(), 1, -100);
 			videoDisplay.show(frame);
 			videoDisplay.draw();
 		}
