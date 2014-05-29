@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void start() {
 		
-		mOpenCvCameraView = (PortraitCameraView) findViewById(R.id.camera_view_wow);
+		mOpenCvCameraView = (PortraitCameraView) findViewById(R.id.camera_view);
 		mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
 		//mOpenCvCameraView.setMaxFrameSize(320, 240);
 		mOpenCvCameraView.setMaxFrameSize(176, 152);

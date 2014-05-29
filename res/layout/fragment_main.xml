@@ -11,7 +11,7 @@
         android:layout_height="fill_parent"
         android:adjustViewBounds="true"
         android:visibility="gone"
-        android:id="@+id/camera_view_wow"
+        android:id="@+id/camera_view"
         opencv:camera_id="front"
         opencv:show_fps="true" />
     
