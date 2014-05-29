@@ -43,6 +43,9 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
+	private VideoBridge videoBridge;
+	private SquatMainThread squat;
+	private ToneGenerator toneGenerator;
 	private PortraitCameraView mOpenCvCameraView;
 	private TextView mainTextView;
 	private Button startButton;
@@ -62,7 +65,6 @@ public class MainActivity extends ActionBarActivity {
 	};
 	
 	private void start() {
-		
 		mOpenCvCameraView = (PortraitCameraView) findViewById(R.id.camera_view);
 		mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
 		//mOpenCvCameraView.setMaxFrameSize(320, 240);
@@ -81,11 +83,34 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 		
-		final ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+		toneGenerator = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
 		
-		VideoBridge videoBridge = new VideoBridge();
+		videoBridge = new VideoBridge();
 		
-		final SquatMainThread squat = new SquatMainThread(videoBridge, videoBridge, new SquatPipelineListener() {
+		squat = makeSquatMainThread();
+		
+		videoBridge.setReadyCallback(new VideoBridgeReadyCallback() {
+			
+			@Override
+			public void start() {
+				// TODO Auto-generated method stub
+				squat.start();
+			}
+		});
+		
+		mOpenCvCameraView.setCvCameraViewListener(videoBridge);
+
+        mOpenCvCameraView.enableView();
+
+		//VideoInput videoInput = new VideoInputCamera();
+		//VideoInput videoInput = new VideoInputFile("/storage/extSdCard/Video/Squat/good_squats.avi");
+		//VideoInput videoInput = new VideoInputDummy(imageView.getWidth(),imageView.getHeight());
+
+		
+	}
+	
+	private SquatMainThread makeSquatMainThread() {
+		return new SquatMainThread(videoBridge, videoBridge, new SquatPipelineListener() {
 			public void onTimeToFixCameraSettings() {
 				System.out.println("SQUAT: Start Pipeline");
 				// Lock the exposure and white balance
@@ -152,35 +177,36 @@ public class MainActivity extends ActionBarActivity {
 				for(int i = 0; i < scores.size(); i++) {
 					System.out.println("SQUAT: Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
 				}
+				
+				resetSquatMainThread();
 			}
 		});
-		
-		videoBridge.setReadyCallback(new VideoBridgeReadyCallback() {
-			
+	}
+	
+	private void resetSquatMainThread() {
+		runOnUiThread(new Runnable() {
 			@Override
-			public void start() {
-				// TODO Auto-generated method stub
+			public void run() {
+				try {
+					squat.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				squat = makeSquatMainThread();
 				squat.start();
 			}
 		});
 		
-		mOpenCvCameraView.setCvCameraViewListener(videoBridge);
-
-        mOpenCvCameraView.enableView();
-
-		//VideoInput videoInput = new VideoInputCamera();
-		//VideoInput videoInput = new VideoInputFile("/storage/extSdCard/Video/Squat/good_squats.avi");
-		//VideoInput videoInput = new VideoInputDummy(imageView.getWidth(),imageView.getHeight());
-
-		
 	}
-	
+
 	private void setText(final TextView textView, final String text) {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				textView.setText(text);
+				textView.setText(text);			
 			}
 		});
 	}
