@@ -27,6 +27,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -65,6 +67,8 @@ public class MainActivity extends ActionBarActivity {
 		mainTextView = (TextView)findViewById(R.id.main_text);
 		mainTextView.setTextColor(Color.WHITE);
 		
+		final ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+		
 		VideoBridge videoBridge = new VideoBridge();
 		final SquatMainThread squat = new SquatMainThread(videoBridge, videoBridge, new SquatPipelineListener() {
 			public void onStart() {
@@ -95,12 +99,18 @@ public class MainActivity extends ActionBarActivity {
 			
 			public void onReadyToSquat() {
 				System.out.println("SQUAT: Ready to Squat!");
-				
+				toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP2);
 			}
 
 			public void onInitialModelFit() {
 				System.out.println("SQUAT: Initial Model Fitted");
 				setMainText("Begin Squatting");
+			}
+			
+			@Override
+			public void onSquatBelowParallel() {
+				// TODO Auto-generated method stub
+				toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK);
 			}
 
 			public void onSquatsComplete(List<Pair<Double, String>> scores) {
@@ -110,6 +120,8 @@ public class MainActivity extends ActionBarActivity {
 					System.out.println("SQUAT: Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
 				}
 			}
+
+			
 		});
 		
 		videoBridge.setReadyCallback(new VideoBridgeReadyCallback() {

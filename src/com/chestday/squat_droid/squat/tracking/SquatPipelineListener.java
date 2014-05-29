@@ -12,4 +12,5 @@ public interface SquatPipelineListener {
 	public void squatSetupHasFigure();
 	public void squatSetupNotHasFigure();
 	public void onMotionDetectorValue(double difference);
+	public void onSquatBelowParallel();
 }

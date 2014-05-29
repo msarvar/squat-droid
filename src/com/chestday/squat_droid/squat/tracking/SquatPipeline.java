@@ -119,6 +119,7 @@ public class SquatPipeline {
 		modelEventManager.addListener(ModelEventType.SQUAT_BELOW_PARALLEL_START, new ModelEventListener() {
 			public void onEvent(Model m) {
 				modelColour.set(new double[]{0, 255, 0});
+				listener.onSquatBelowParallel();
 			}
 		});
 		
