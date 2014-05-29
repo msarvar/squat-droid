@@ -91,35 +91,37 @@ public class MainActivity extends ActionBarActivity {
 				// Lock the exposure and white balance
 				mOpenCvCameraView.fixExposureAndWhiteBalance();
 				
-				setMainText("Wait for still surroundings");
+				setText(mainTextView, "Wait for still surroundings");
 			}
 			
 			@Override
 			public boolean isStartButtonPressed() {
-				
 				return startButtonPressed;
 			}
 
 			@Override
 			public void onBackgroundStationary(boolean isStationary) {
-				setMainText(isStationary ? "Press Start" : "Please ensure surroundings are still");
+				setText(mainTextView, isStationary ? "Press Start" : "Ensure surroundings are still");
 				setStartButtonEnabled(isStationary);
 			}
 			
 			public void onStart() {
-				setMainText("Walk into view");
+				// Reset start button state
+				startButtonPressed = false;
+				setText(mainTextView, "Walk into view");
+				setStartButtonEnabled(false);
 			}
 			
 			@Override
 			public void squatSetupHasFigure() {
 				// TODO Auto-generated method stub
-				setMainText("Found figure, stand still");
+				setText(mainTextView, "Found figure, stand still");
 			}
 
 			@Override
 			public void squatSetupNotHasFigure() {
 				// TODO Auto-generated method stub
-				setMainText("Walk into view");
+				setText(mainTextView, "Walk into view");
 			}
 			
 			@Override
@@ -135,7 +137,7 @@ public class MainActivity extends ActionBarActivity {
 
 			public void onInitialModelFit() {
 				System.out.println("SQUAT: Initial Model Fitted");
-				setMainText("Squat!");
+				setText(mainTextView, "Squat!");
 			}
 			
 			@Override
@@ -145,7 +147,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 
 			public void onSquatsComplete(List<Pair<Double, String>> scores) {
-				setMainText("Finished. Reps: " + scores.size());
+				setText(mainTextView, "Finished. Reps: " + scores.size());
 				System.out.println("SQUAT: Reps: " + scores.size());
 				for(int i = 0; i < scores.size(); i++) {
 					System.out.println("SQUAT: Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
@@ -173,12 +175,22 @@ public class MainActivity extends ActionBarActivity {
 		
 	}
 	
-	private void setMainText(final String text) {
+	private void setText(final TextView textView, final String text) {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				mainTextView.setText(text);
+				textView.setText(text);
+			}
+		});
+	}
+	
+	private void setText(final Button button, final String text) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				button.setText(text);
 			}
 		});
 	}

@@ -60,16 +60,6 @@ public class SquatMainThread extends Thread {
 		
 		squatPipeline.process();
 		
-		// Cycle through the last few frames
-		int i = 0;
-		while(videoInput.hasNextFrame()) {
-			i++;
-			Mat frame = videoInput.getNextFrame();
-			videoDisplay.show(frame);
-			videoDisplay.draw();
-			System.out.println("Frame " + i);
-		}
-		
 		//videoDisplay.close();
 		
 		System.out.println("done");
