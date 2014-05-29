@@ -18,6 +18,7 @@ import com.chestday.squat_droid.squat.optimization.ModelInitialisationFitterOpti
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorAdvanced;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaive;
+import com.chestday.squat_droid.squat.utils.BackgroundSubtractorOpenCV;
 import com.chestday.squat_droid.squat.utils.MotionDetector;
 import com.chestday.squat_droid.squat.utils.Value;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
@@ -55,7 +56,7 @@ public class SquatPipeline {
 		
 		//VideoDisplay debugDisplay = new VideoDisplay("Debug", videoInput.getWidth(), videoInput.getHeight());
 		
-		BackgroundSubtractor bg = new BackgroundSubtractorNaive(firstFrame, 30);
+		BackgroundSubtractor bg = new BackgroundSubtractorAdvanced(firstFrame, 30);
 		
 		SquatSetup squatSetup = new SquatSetup(bg, firstFrame, listener);
 		Mat readyFrame = new Mat();
@@ -162,15 +163,14 @@ public class SquatPipeline {
 			
 			squatTracker.update(frame);
 			
-			Mat m = new Mat(frame.size(), frame.type());
-
-			model.drawSkeleton(m, modelColour);
+			model.drawSkeleton(frame, modelColour);
 			
 			if(drawWeightDistroLine.get()) {
-				model.drawWeightDistributionLine(m, new Scalar(0,0,255));
+				model.drawWeightDistributionLine(frame, new Scalar(0,0,255));
 			}
 			
-			videoDisplay.show(VideoTools.blend(frame, m));
+			
+			videoDisplay.show(frame);
 			videoDisplay.draw();
 			
 			//debugDisplay.show(bg.subtract(frame));

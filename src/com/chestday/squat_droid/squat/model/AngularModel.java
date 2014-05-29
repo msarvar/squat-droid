@@ -162,8 +162,6 @@ public class AngularModel implements Model {
 	
 	@Override
 	public void drawSkeleton(Mat m, Scalar colour) {
-		m.setTo(new Scalar(0,0,0));
-		
 		Point[] points = calculatePoints();
 		
 		for(Point p : points) {
