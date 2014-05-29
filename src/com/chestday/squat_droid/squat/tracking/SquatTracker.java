@@ -14,8 +14,8 @@ import com.chestday.squat_droid.squat.utils.Pair;
 
 public class SquatTracker {
 	
-	private static final int FITTING_ITERATIONS = 2;
-	private static final int FOOT_MOVEMENT_FRAMES = 10;
+	private static final int FITTING_ITERATIONS = 1;
+	private static final int FOOT_MOVEMENT_FRAMES = 6;
 	
 	private ModelFitter fitter;
 	private SquatRepScorer squatScorer;

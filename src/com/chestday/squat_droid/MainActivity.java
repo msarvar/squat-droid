@@ -62,7 +62,8 @@ public class MainActivity extends ActionBarActivity {
 		
 		mOpenCvCameraView = (PortraitCameraView) findViewById(R.id.camera_view_wow);
 		mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
-		mOpenCvCameraView.setMaxFrameSize(320, 240);
+		//mOpenCvCameraView.setMaxFrameSize(320, 240);
+		mOpenCvCameraView.setMaxFrameSize(176, 152);
 		
 		mainTextView = (TextView)findViewById(R.id.main_text);
 		mainTextView.setTextColor(Color.WHITE);
