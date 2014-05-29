@@ -6,6 +6,7 @@ import java.util.Queue;
 
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
+import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
@@ -17,11 +18,16 @@ import com.chestday.squat_droid.squat.utils.VideoTools;
 
 public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListener2 {
 
+	public static final int LEFT_FACING = 0;
+	public static final int RIGHT_FACING = 1;
+	
 	private volatile Mat inputFrame;
 	private volatile Mat outputFrame;
 	
 	private int width;
 	private int height;
+	
+	private int direction = LEFT_FACING;
 	
 	private VideoBridgeReadyCallback vbrc;
 	
@@ -31,6 +37,10 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	
 	public void setReadyCallback(VideoBridgeReadyCallback vbrc) {
 		this.vbrc = vbrc;
+	}
+	
+	public void setDirection(int direction) {
+		this.direction = direction;
 	}
 	
 	@Override
@@ -119,6 +129,10 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 		
 		inputFrame.rgba().convertTo(m, CvType.CV_8UC1);
 		
+		if(direction == RIGHT_FACING) {
+			Core.flip(m, m, 1);
+		}
+		
 		synchronized (this) {
 			this.inputFrame = m;
 			notify();
@@ -126,6 +140,10 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 		
 		Mat out = new Mat();
 		this.outputFrame.convertTo(out, 24);
+		
+		if(direction == RIGHT_FACING) {
+			Core.flip(out, out, 1);
+		}
 		
 		if(!started) {
 			started = true;

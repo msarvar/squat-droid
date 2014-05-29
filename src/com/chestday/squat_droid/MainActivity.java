@@ -88,6 +88,7 @@ public class MainActivity extends ActionBarActivity {
 		toneGenerator = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
 		
 		videoBridge = new VideoBridge();
+		videoBridge.setDirection(VideoBridge.RIGHT_FACING);
 		
 		squat = makeSquatMainThread();
 		
