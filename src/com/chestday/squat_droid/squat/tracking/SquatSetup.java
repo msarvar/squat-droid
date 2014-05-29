@@ -19,7 +19,7 @@ public class SquatSetup {
 	
 	public SquatSetup(BackgroundSubtractor backgroundSubtractor, Mat initialFrame, SquatPipelineListener listener) {
 		bg = backgroundSubtractor;
-		motionDetector = new MotionDetector(bg.subtract(initialFrame));
+		motionDetector = new MotionDetector(bg.subtract(initialFrame), listener);
 		figureDetector = new FigureDetector();
 		this.listener = listener;
 	}

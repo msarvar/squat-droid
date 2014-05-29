@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
 		
 		mOpenCvCameraView = (PortraitCameraView) findViewById(R.id.camera_view_wow);
 		mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
-		mOpenCvCameraView.setMaxFrameSize(240, 300);
+		mOpenCvCameraView.setMaxFrameSize(320, 240);
 		
 		mainTextView = (TextView)findViewById(R.id.main_text);
 		mainTextView.setTextColor(Color.WHITE);
@@ -78,13 +78,19 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void squatSetupHasFigure() {
 				// TODO Auto-generated method stub
-				setMainText("Found figure, stand still");
+				//setMainText("Found figure, stand still");
 			}
 
 			@Override
 			public void squatSetupNotHasFigure() {
 				// TODO Auto-generated method stub
-				setMainText("Walk into view");
+				//setMainText("Walk into view");
+			}
+			
+			@Override
+			public void onMotionDetectorValue(double difference) {
+				// TODO Auto-generated method stub
+				setMainText("Motion value: " + difference);
 			}
 			
 			public void onReadyToSquat() {

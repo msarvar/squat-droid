@@ -11,4 +11,5 @@ public interface SquatPipelineListener {
 	public void onSquatsComplete(List<Pair<Double,String>>scores);
 	public void squatSetupHasFigure();
 	public void squatSetupNotHasFigure();
+	public void onMotionDetectorValue(double difference);
 }
