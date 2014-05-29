@@ -114,12 +114,18 @@ public class MainActivity extends ActionBarActivity {
 	
 	private SquatMainThread makeSquatMainThread() {
 		return new SquatMainThread(videoBridge, videoBridge, new SquatPipelineListener() {
-			public void onTimeToFixCameraSettings() {
+			public void onInitialised() {
 				System.out.println("SQUAT: Start Pipeline");
-				// Lock the exposure and white balance
-				mOpenCvCameraView.fixExposureAndWhiteBalance();
-				
 				setText(mainTextView, "Wait for still surroundings");
+			}
+			
+			public void onTimeToFixCameraSettings() {
+				// Lock the exposure and white balance
+				mOpenCvCameraView.setExposureAndWhiteBalanceLock(true);
+			}
+			
+			public void onTimeToUnFixCameraSettings() {
+				mOpenCvCameraView.setExposureAndWhiteBalanceLock(false);
 			}
 			
 			@Override

@@ -253,10 +253,10 @@ public void onPreviewFrame(byte[] frame, Camera arg1) {
         mCamera.addCallbackBuffer(mBuffer);
 }
 
-public void fixExposureAndWhiteBalance() {
+public void setExposureAndWhiteBalanceLock(boolean value) {
 	Camera.Parameters params = mCamera.getParameters();
-	params.setAutoExposureLock(true);
-    params.setAutoWhiteBalanceLock(true);
+	params.setAutoExposureLock(value);
+    params.setAutoWhiteBalanceLock(value);
     mCamera.setParameters(params);
 }
 

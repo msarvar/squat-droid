@@ -38,7 +38,7 @@ public class SquatMainThread extends Thread {
 			frameDumpCount++;
 		}
 		
-		listener.onTimeToFixCameraSettings();
+		listener.onInitialised();
 		
 		// This loop is for activating/deactivating the button - wait for still background
 		BackgroundSubtractor bg = new BackgroundSubtractorOpenCV(0.05, 10);
@@ -53,12 +53,16 @@ public class SquatMainThread extends Thread {
 			listener.onBackgroundStationary(percentage < 0.3);
 		}
 		
+		listener.onTimeToFixCameraSettings();
+		
 		// The button has been pressed, let's go!
 		listener.onStart();
 		
 		SquatPipeline squatPipeline = new SquatPipeline(videoInput, videoDisplay, listener);
 		
 		squatPipeline.process();
+		
+		listener.onTimeToUnFixCameraSettings();
 		
 		// Cycle through frames until we press reset
 		while(!listener.isStartButtonPressed() && videoInput.hasNextFrame()) {
