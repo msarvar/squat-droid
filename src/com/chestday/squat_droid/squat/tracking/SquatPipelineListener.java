@@ -19,4 +19,5 @@ public interface SquatPipelineListener {
 	public void onFinish();
 	public void onTimeToUnFixCameraSettings();
 	public void onInitialised();
+	public void onAscendStart();
 }

@@ -145,6 +145,12 @@ public class SquatPipeline {
 			}
 		});
 		
+		modelEventManager.addListener(ModelEventType.SQUAT_ASCEND_START, new ModelEventListener() {
+			public void onEvent(Model m) {
+				listener.onAscendStart();
+			}
+		});
+		
 		SquatTracker squatTracker = new SquatTracker(model, modelEventManager, bg);
 		squatTracker.start();
 		

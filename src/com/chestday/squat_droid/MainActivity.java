@@ -138,7 +138,7 @@ public class MainActivity extends ActionBarActivity {
 		return new SquatMainThread(videoBridge, videoBridge, new SquatPipelineListener() {
 			public void onInitialised() {
 				System.out.println("SQUAT: Start Pipeline");
-				setText(mainTextView, "Wait for still surroundings");
+				setText(mainTextView, "Ensure surroundings are still");
 			}
 			
 			public void onTimeToFixCameraSettings() {
@@ -201,9 +201,13 @@ public class MainActivity extends ActionBarActivity {
 				// TODO Auto-generated method stub
 				toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK);
 			}
+			
+			public void onAscendStart() {
+				setText(mainTextView, "Walk away when done");
+			}
 
 			public void onSquatsComplete(List<Pair<Double, String>> scores) {
-				setText(mainTextView, "Finished, press Reset to squat again");
+				setText(mainTextView, "Finished");
 				
 				String scoreString = scores.size() == 0 ? "\nYou completed 0 reps.\n\n:(" : "\n";
 				
