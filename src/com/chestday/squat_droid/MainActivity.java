@@ -188,7 +188,7 @@ public class MainActivity extends ActionBarActivity {
 			
 			public void onReadyToSquat() {
 				System.out.println("SQUAT: Ready to Squat!");
-				toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP2);
+				toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK);
 			}
 
 			public void onInitialModelFit() {
