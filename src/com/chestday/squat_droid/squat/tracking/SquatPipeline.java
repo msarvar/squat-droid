@@ -157,7 +157,7 @@ public class SquatPipeline {
 			model.drawSkeleton(frame, modelColour);
 			
 			if(drawWeightDistroLine.get()) {
-				model.drawWeightDistributionLine(frame, new Scalar(0,0,255));
+				model.drawWeightDistributionLine(frame, new Scalar(255,0,0));
 			}
 			
 			
