@@ -47,6 +47,10 @@ public class MainActivity extends ActionBarActivity {
 	private SquatMainThread squat;
 	private ToneGenerator toneGenerator;
 	private PortraitCameraView mOpenCvCameraView;
+	
+	private ImageView flipButton;
+	private int direction = VideoBridge.LEFT_FACING;
+	
 	private TextView mainTextView;
 	private TextView scoresTextView;
 	private Button startButton;
@@ -75,6 +79,25 @@ public class MainActivity extends ActionBarActivity {
 		
 		scoresTextView = (TextView)findViewById(R.id.scores_text);
 		
+		flipButton = (ImageView)findViewById(R.id.flip_image_view);
+		flipButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(direction == VideoBridge.LEFT_FACING) {
+					// Change to right facing
+					direction = VideoBridge.RIGHT_FACING;
+					flipButton.setImageResource(R.drawable.flipbuttonleft);
+				} else {
+					// Change to left facing
+					direction = VideoBridge.LEFT_FACING;
+					flipButton.setImageResource(R.drawable.flipbuttonright);
+				}
+				
+				videoBridge.setDirection(direction);
+			}
+		});
+		
 		startButton = (Button)findViewById(R.id.start_button);
 		startButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -88,7 +111,6 @@ public class MainActivity extends ActionBarActivity {
 		toneGenerator = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
 		
 		videoBridge = new VideoBridge();
-		videoBridge.setDirection(VideoBridge.RIGHT_FACING);
 		
 		squat = makeSquatMainThread();
 		

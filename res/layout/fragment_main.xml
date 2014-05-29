@@ -44,13 +44,32 @@
         </TextView>
     </ScrollView>
     
-    <Button
-        android:id="@+id/start_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:enabled="false"
-        android:text="Start" />
+    <LinearLayout 
+        android:id="@+id/LinearLayout02"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+        
+        <Button
+	        android:id="@+id/start_button"
+	        android:layout_width="0dip"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="bottom"
+	        android:enabled="false"
+	        android:layout_weight="1"
+	        android:textColor="@color/white"
+	        android:text="Start" />
+        
+        <ImageView
+            android:id="@+id/flip_image_view"
+            android:layout_width="80dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:adjustViewBounds="true"
+            android:src="@drawable/flipbuttonright" />
+
+    </LinearLayout>
+    
     </LinearLayout>
 
 </FrameLayout>
