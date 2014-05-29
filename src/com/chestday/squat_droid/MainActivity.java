@@ -176,7 +176,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onSquatsComplete(List<Pair<Double, String>> scores) {
 				setText(mainTextView, "Finished, press Reset to squat again");
 				
-				String scoreString = "\n";
+				String scoreString = scores.size() == 0 ? "\nYou completed 0 reps.\n\n:(" : "\n";
 				
 				for(int i = 0; i < scores.size(); i++) {
 					String scorePercentage = String.format("%.1f", scores.get(i).l);
