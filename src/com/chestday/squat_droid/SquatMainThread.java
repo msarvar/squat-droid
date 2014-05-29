@@ -60,6 +60,15 @@ public class SquatMainThread extends Thread {
 		
 		squatPipeline.process();
 		
+		// Cycle through frames until we press reset
+		while(!listener.isStartButtonPressed() && videoInput.hasNextFrame()) {
+			Mat frame = videoInput.getNextFrame();
+			videoDisplay.show(frame);
+			videoDisplay.draw();
+		}
+		
+		listener.onFinish();
+		
 		//videoDisplay.close();
 		
 		System.out.println("done");

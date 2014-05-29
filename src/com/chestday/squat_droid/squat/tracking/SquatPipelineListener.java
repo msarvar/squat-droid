@@ -16,4 +16,5 @@ public interface SquatPipelineListener {
 	public void onTimeToFixCameraSettings();
 	public boolean isStartButtonPressed();
 	public void onBackgroundStationary(boolean isStationary);
+	public void onFinish();
 }

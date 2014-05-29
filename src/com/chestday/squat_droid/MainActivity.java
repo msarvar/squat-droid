@@ -172,12 +172,19 @@ public class MainActivity extends ActionBarActivity {
 			}
 
 			public void onSquatsComplete(List<Pair<Double, String>> scores) {
-				setText(mainTextView, "Finished. Reps: " + scores.size());
+				setText(mainTextView, "Finished, press Reset to squat again");
 				System.out.println("SQUAT: Reps: " + scores.size());
 				for(int i = 0; i < scores.size(); i++) {
 					System.out.println("SQUAT: Rep " + (i+1) + " {Score: " + scores.get(i).l + "%, Problem: " + scores.get(i).r + "}");
 				}
 				
+				setText(startButton, "Reset");
+				setStartButtonEnabled(true);
+			}
+			
+			public void onFinish() {
+				startButtonPressed = false;
+				setStartButtonEnabled(false);
 				resetSquatMainThread();
 			}
 		});
@@ -195,6 +202,7 @@ public class MainActivity extends ActionBarActivity {
 				}
 				
 				squat = makeSquatMainThread();
+				setText(startButton, "Start");
 				squat.start();
 			}
 		});
