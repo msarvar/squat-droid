@@ -83,19 +83,19 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void squatSetupHasFigure() {
 				// TODO Auto-generated method stub
-				//setMainText("Found figure, stand still");
+				setMainText("Found figure, stand still");
 			}
 
 			@Override
 			public void squatSetupNotHasFigure() {
 				// TODO Auto-generated method stub
-				//setMainText("Walk into view");
+				setMainText("Walk into view");
 			}
 			
 			@Override
 			public void onMotionDetectorValue(double difference) {
 				// TODO Auto-generated method stub
-				setMainText("Motion value: " + difference);
+				//setMainText("Motion value: " + difference);
 			}
 			
 			public void onReadyToSquat() {
@@ -105,7 +105,7 @@ public class MainActivity extends ActionBarActivity {
 
 			public void onInitialModelFit() {
 				System.out.println("SQUAT: Initial Model Fitted");
-				setMainText("Begin Squatting");
+				setMainText("Squat!");
 			}
 			
 			@Override

@@ -16,11 +16,11 @@
         opencv:show_fps="true" />
     
     <TextView
-         android:id="@+id/main_text"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_gravity="bottom"
-         android:text="@string/empty"
-         android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:id="@+id/main_text"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:text="@string/empty"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </FrameLayout>
