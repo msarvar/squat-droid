@@ -6,8 +6,8 @@ import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
 
 public class MotionDetector {
 	private static final int FRAME_SKIP = 3;
-	private static final int NUM_DIFFERENCES = 7;
-	private static final double MOTION_THRESHOLD = 3;
+	private static final int NUM_DIFFERENCES = 8;
+	private static final double MOTION_THRESHOLD = 2;
 	
 	private FixedQueue<Double> differences;
 	private Mat prev;
