@@ -16,7 +16,7 @@ public class ModelFitterOptim implements ModelFitter {
 	public void fit(Model model, Mat frame) {
 		ModelFitFunction fitFunction = new ModelFitFunction(frame, model);
 		
-		MultivariateOptimizer optim = new BOBYQAOptimizer(2*model.get().length);
+		MultivariateOptimizer optim = new BOBYQAOptimizer(2 + model.get().length);
 		
 		try {
 			PointValuePair p = optim.optimize(
