@@ -36,13 +36,14 @@
         android:layout_height="0dip"
         android:layout_weight="1" >
 
-        <TextView
-            android:id="@+id/scores_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/empty"
-            android:textColor="@color/white">
-        </TextView>
+        <TableLayout
+            android:id="@+id/score_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:shrinkColumns="*">
+            
+        </TableLayout>
     </ScrollView>
     
     <LinearLayout 

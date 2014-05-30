@@ -26,6 +26,7 @@ import com.chestday.squat_droid.squat.utils.android.VideoInputFile;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -40,10 +41,14 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
+	private Context context;
+	
 	private VideoBridge videoBridge;
 	private SquatMainThread squat;
 	private ToneGenerator toneGenerator;
@@ -53,7 +58,7 @@ public class MainActivity extends ActionBarActivity {
 	private int direction = VideoBridge.LEFT_FACING;
 	
 	private TextView mainTextView;
-	private TextView scoresTextView;
+	private TableLayout scoresTable;
 	private Button startButton;
 	private boolean startButtonPressed = false;
 	
@@ -78,7 +83,7 @@ public class MainActivity extends ActionBarActivity {
 		
 		mainTextView = (TextView)findViewById(R.id.main_text);
 		
-		scoresTextView = (TextView)findViewById(R.id.scores_text);
+		scoresTable = (TableLayout)findViewById(R.id.score_table);
 		
 		flipButton = (ImageView)findViewById(R.id.flip_image_view);
 		flipButton.setOnClickListener(new View.OnClickListener() {
@@ -210,14 +215,14 @@ public class MainActivity extends ActionBarActivity {
 			public void onSquatsComplete(List<Pair<Double, String>> scores) {
 				setText(mainTextView, "Finished");
 				
-				String scoreString = scores.size() == 0 ? "\nYou completed 0 reps.\n\n:(" : "\n";
+				addScoreRow(new String[]{"Rep", "Score", "Problem"}, Color.WHITE);
 				
 				for(int i = 0; i < scores.size(); i++) {
 					String scorePercentage = String.format("%.1f", scores.get(i).l);
-					scoreString += "Rep " + (i+1) + " {Score: " + scorePercentage + "%, Problem: " + scores.get(i).r + "}\n";
+					addScoreRow(new String[]{Integer.toString(i+1), scorePercentage, scores.get(i).r}, percentageToColour(scores.get(i).l));
 				}
 				
-				setText(scoresTextView, scoreString);
+				//setText(scoresTextView, scoreString);
 				
 				setText(startButton, "Reset");
 				
@@ -245,7 +250,10 @@ public class MainActivity extends ActionBarActivity {
 				
 				squat = makeSquatMainThread();
 				setText(startButton, "Start");
-				setText(scoresTextView, "");
+				
+				// Clear the score table
+				scoresTable.removeAllViews();
+				
 				squat.start();
 			}
 		});
@@ -284,9 +292,34 @@ public class MainActivity extends ActionBarActivity {
 		});
 	}
 	
+	private void addScoreRow(final String[] cols, final int colour) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				TableRow row = new TableRow(context);
+				
+				for(String col : cols) {
+					TextView tv = new TextView(context);
+					tv.setText(col);
+					tv.setTextAppearance(context, R.style.ScoreTable);
+					tv.setTextColor(colour);
+					row.addView(tv);
+				}
+				
+				scoresTable.addView(row);
+			}
+		});
+	}
+	
+	private int percentageToColour(double value){
+	    return android.graphics.Color.HSVToColor(new float[]{(float)value,1f,1f});
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		context = this;
 		
 		//Debug.startMethodTracing("squat", 80000000);
 		
