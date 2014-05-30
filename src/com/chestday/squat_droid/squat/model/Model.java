@@ -24,4 +24,6 @@ public interface Model {
 	public boolean isSquatHeelGrounded();
 	public boolean isSquatWeightOverFeet();
 	public boolean isSquatBackAngleInOptimalRange();
+	public boolean isSquatWeightForward();
+	public boolean isSquatWeightBackward();
 }

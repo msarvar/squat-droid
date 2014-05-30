@@ -231,6 +231,22 @@ public class AngularModel implements Model {
 	}
 	
 	@Override
+	public boolean isSquatWeightForward() {
+		Point[] points = calculatePoints();
+		double weightX = points[SHOULDER_HIP].x;
+		double toeX = points[ANKLE_TOE].x;
+		return (toeX - 10 * scale) > weightX;
+	}
+	
+	@Override
+	public boolean isSquatWeightBackward() {
+		Point[] points = calculatePoints();
+		double weightX = points[SHOULDER_HIP].x;
+		double heelX = points[KNEE_ANKLE].x;
+		return (heelX + 10 * scale) < weightX;
+	}
+	
+	@Override
 	public boolean isSquatBackAngleInOptimalRange() {
 		return angles[SHOULDER_HIP] > 35 && angles[SHOULDER_HIP] < 90;
 	}

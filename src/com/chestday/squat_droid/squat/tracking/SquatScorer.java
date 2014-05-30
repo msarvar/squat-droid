@@ -15,7 +15,8 @@ public class SquatScorer {
 	private Map<String, Double> maxPenalties;
 	
 	// Contributors that can lower the score
-	private static final String WEIGHT_DISTRIBUTION = "Weight Distribution";
+	private static final String WEIGHT_DISTRIBUTION_FORWARD = "Weight Too Far Forward";
+	private static final String WEIGHT_DISTRIBUTION_BACKWARD = "Weight Too Far Backward";
 	private static final String BAD_BACK_ANGLE = "Bad Back Angle";
 	private static final String KNEES_FORWARD = "Knees Forward";
 	private static final String KNEES_BACKWARD = "Knees Backward";
@@ -51,7 +52,8 @@ public class SquatScorer {
 	private void initialiseContributors() {
 		contributors = new HashMap<String, Integer>();
 		
-		contributors.put(WEIGHT_DISTRIBUTION, 0);
+		contributors.put(WEIGHT_DISTRIBUTION_FORWARD, 0);
+		contributors.put(WEIGHT_DISTRIBUTION_BACKWARD, 0);
 		contributors.put(BAD_BACK_ANGLE, 0);
 		contributors.put(KNEES_FORWARD, 0);
 		contributors.put(KNEES_BACKWARD, 0);
@@ -66,7 +68,8 @@ public class SquatScorer {
 		maxPenalties = new HashMap<String, Double>();
 		
 		// Percentage penalties (do not need to add to 100)
-		maxPenalties.put(WEIGHT_DISTRIBUTION, 0.20);
+		maxPenalties.put(WEIGHT_DISTRIBUTION_FORWARD, 0.20);
+		maxPenalties.put(WEIGHT_DISTRIBUTION_BACKWARD, 0.20);
 		maxPenalties.put(BAD_BACK_ANGLE, 0.20);
 		maxPenalties.put(KNEES_FORWARD, 0.20);
 		maxPenalties.put(KNEES_BACKWARD, 0.10);
@@ -77,8 +80,12 @@ public class SquatScorer {
 	
 	private class BadFrameCounter implements ModelEventListener {
 		public void onEvent(Model m) {
-			if(!m.isSquatWeightOverFeet()) {
-				contributors.put(WEIGHT_DISTRIBUTION, contributors.get(WEIGHT_DISTRIBUTION) + 1);
+			if(m.isSquatWeightForward()) {
+				contributors.put(WEIGHT_DISTRIBUTION_FORWARD, contributors.get(WEIGHT_DISTRIBUTION_FORWARD) + 1);
+			}
+			
+			if(m.isSquatWeightBackward()) {
+				contributors.put(WEIGHT_DISTRIBUTION_BACKWARD, contributors.get(WEIGHT_DISTRIBUTION_BACKWARD) + 1);
 			}
 			
 			if(!m.isSquatBackAngleInOptimalRange()) {
