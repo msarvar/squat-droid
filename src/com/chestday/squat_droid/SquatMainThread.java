@@ -9,6 +9,7 @@ import org.opencv.imgproc.Imgproc;
 import com.chestday.squat_droid.squat.tracking.SquatPipeline;
 import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
+import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveHSV;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorOpenCV;
 import com.chestday.squat_droid.squat.utils.Pair;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
