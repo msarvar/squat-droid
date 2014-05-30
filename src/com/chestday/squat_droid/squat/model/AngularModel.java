@@ -46,7 +46,7 @@ public class AngularModel implements Model {
 	private void initialiseWidths() {
 		widths[HEAD_SHOULDER] = 15; //30;
 		widths[SHOULDER_HIP] = 20;//40;
-		widths[HIP_KNEE] = 15;//30;
+		widths[HIP_KNEE] = 13;//30;
 		widths[KNEE_ANKLE] = 10;//20;
 		widths[ANKLE_TOE] = 5;//10;
 	}
