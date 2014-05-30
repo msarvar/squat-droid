@@ -154,7 +154,7 @@ public class SquatScorer {
 	public String getMainContributor() {
 		
 		int maxContribution = 0;
-		String mainContributor = "Perfect Squat";
+		String mainContributor = "None!";
 		for (Map.Entry<String, Integer> entry : contributors.entrySet()) {
 		    if(entry.getValue() > maxContribution) {
 		    	maxContribution = entry.getValue();
