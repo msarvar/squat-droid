@@ -119,12 +119,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	private boolean started = false;
 	
 	@Override
-	public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-		System.gc();
-		
-		// TODO Auto-generated method stub
-		//System.out.println("Got a frame!");
-		//System.out.println("Type: ::: " + inputFrame.rgba().type());
+	public Mat onCameraFrame(CvCameraViewFrame inputFrame) {		
 		Mat m = new Mat();
 		
 		inputFrame.rgba().convertTo(m, CvType.CV_8UC1);

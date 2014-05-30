@@ -10,10 +10,12 @@ public class ModelFitFunction implements MultivariateFunction {
 
 	private Mat frame;
 	private Model model;
+	private Mat m;
 
 	public ModelFitFunction(Mat frame, Model model) {
 		this.frame = frame;
 		this.model = model;
+		this.m = new Mat(frame.size(), frame.type());
 	}
 	
 	@Override
@@ -21,7 +23,6 @@ public class ModelFitFunction implements MultivariateFunction {
 		
 		model.set(modelAsDouble);
 		
-		Mat m = new Mat(frame.size(), frame.type());
 		model.draw(m);
 		
 		// We want the most overlap

@@ -30,6 +30,7 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
+import android.os.Debug;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -286,6 +287,9 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		//Debug.startMethodTracing("squat", 80000000);
+		
 		setContentView(R.layout.activity_main);
 
 		if (savedInstanceState == null) {
@@ -294,6 +298,11 @@ public class MainActivity extends ActionBarActivity {
 		}
 
 		OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_5, this, loaderCallback);
+	}
+	
+	protected void onDestroy() {
+		super.onDestroy();
+		//Debug.stopMethodTracing();
 	}
 
 	@Override
