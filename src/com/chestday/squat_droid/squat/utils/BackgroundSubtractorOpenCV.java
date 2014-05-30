@@ -1,6 +1,7 @@
 package com.chestday.squat_droid.squat.utils;
 
 import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 import org.opencv.video.BackgroundSubtractorMOG;
 
 public class BackgroundSubtractorOpenCV implements BackgroundSubtractor {
@@ -15,8 +16,10 @@ public class BackgroundSubtractorOpenCV implements BackgroundSubtractor {
 	}
 	
 	public Mat subtract(Mat frame) {
+		Mat rgb = new Mat();
+		Imgproc.cvtColor(frame, rgb, Imgproc.COLOR_RGBA2RGB);
 		Mat mask = new Mat();
-		subtractor.apply(frame, mask, learningRate);
+		subtractor.apply(rgb, mask, learningRate);
 		return mask;
 	}
 }

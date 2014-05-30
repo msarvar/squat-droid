@@ -12,10 +12,10 @@ import org.opencv.imgproc.Imgproc;
 
 public class BackgroundSubtractorAdvanced implements BackgroundSubtractor {
 
-	private BackgroundSubtractorNaive bg;
+	private BackgroundSubtractorNaiveShadow bg;
 	
 	public BackgroundSubtractorAdvanced(Mat background, double threshold) {
-		bg = new BackgroundSubtractorNaive(background, threshold);
+		bg = new BackgroundSubtractorNaiveShadow(background, threshold);
 	}
 	
 	@Override

@@ -46,10 +46,8 @@ public class SquatMainThread extends Thread {
 		while(!listener.isStartButtonPressed() && videoInput.hasNextFrame()) {
 			Mat frame = videoInput.getNextFrame();
 			videoDisplay.show(frame);
-			videoDisplay.draw();
-			Mat rgb = new Mat();
-			Imgproc.cvtColor(frame, rgb, Imgproc.COLOR_RGBA2RGB);
-			Mat b = bg.subtract(rgb);
+			videoDisplay.draw();			
+			Mat b = bg.subtract(frame);
 			double percentage = VideoTools.percentageNonZero(b);
 			listener.onBackgroundStationary(percentage < 0.3);
 		}

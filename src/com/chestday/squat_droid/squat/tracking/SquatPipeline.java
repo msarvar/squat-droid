@@ -19,6 +19,7 @@ import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorAdvanced;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaive;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveHSV;
+import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveShadow;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorOpenCV;
 import com.chestday.squat_droid.squat.utils.MotionDetector;
 import com.chestday.squat_droid.squat.utils.Value;
@@ -49,7 +50,6 @@ public class SquatPipeline {
 		//VideoDisplay debugDisplay = new VideoDisplay("Debug", videoInput.getWidth(), videoInput.getHeight());
 		
 		BackgroundSubtractor bg = new BackgroundSubtractorAdvanced(firstFrame, 30);
-		//BackgroundSubtractor bg = new BackgroundSubtractorNaiveHSV(firstFrame);
 		
 		SquatSetup squatSetup = new SquatSetup(bg, firstFrame, listener);
 		Mat readyFrame = new Mat();
@@ -163,6 +163,7 @@ public class SquatPipeline {
 			squatTracker.update(frame);
 			
 //			Mat m = new Mat(frame.size(), frame.type());
+//			Mat b = bg.subtract(frame);
 //			model.draw(m);
 			model.drawSkeleton(frame, modelColour);
 			
@@ -170,10 +171,9 @@ public class SquatPipeline {
 				model.drawWeightDistributionLine(frame, new Scalar(255,0,0));
 			}
 			
-//			Mat b = bg.subtract(frame);
-//			Mat b2 = new Mat(frame.size(), frame.type());
-//			Imgproc.cvtColor(b, b2, Imgproc.COLOR_GRAY2BGRA);
 			
+			//Mat b2 = new Mat(frame.size(), frame.type());
+			//Imgproc.cvtColor(b, b2, Imgproc.COLOR_GRAY2BGRA);
 			//Mat blended = VideoTools.blend(frame, b2);
 			
 			videoDisplay.show(frame);
