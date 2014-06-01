@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.opencv.core.Mat;
 
+import android.preference.PreferenceManager;
+
+import com.chestday.squat_droid.SquatPreferences;
 import com.chestday.squat_droid.squat.model.Model;
 import com.chestday.squat_droid.squat.model.event.ModelEventManager;
 import com.chestday.squat_droid.squat.optimization.ModelFitter;
@@ -14,7 +17,7 @@ import com.chestday.squat_droid.squat.utils.Pair;
 
 public class SquatTracker {
 	
-	private static final int FITTING_ITERATIONS = 2;
+	private static int FITTING_ITERATIONS = 1;
 	private static final int FOOT_MOVEMENT_FRAMES = 6;
 	
 	private ModelFitter fitter;
@@ -26,6 +29,8 @@ public class SquatTracker {
 	private FixedQueue<Boolean> footMovement;
 	
 	public SquatTracker(Model model, ModelEventManager modelEventManager, BackgroundSubtractor backgroundSubtractor) {
+		FITTING_ITERATIONS = Integer.parseInt(SquatPreferences.getValue("fitting_iterations"));
+		
 		squatScorer = new SquatRepScorer(modelEventManager);
 		sqrc = new SquatRepCounter(modelEventManager);
 		fitter = new ModelFitterOptim();

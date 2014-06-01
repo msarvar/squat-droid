@@ -27,6 +27,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -47,6 +48,8 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
+	private static final int RESULT_SETTINGS = 1;
+	
 	private Context context;
 	
 	private VideoBridge videoBridge;
@@ -321,6 +324,9 @@ public class MainActivity extends ActionBarActivity {
 		
 		context = this;
 		
+		// Initialise preferences object
+		SquatPreferences.init(this);
+		
 		//Debug.startMethodTracing("squat", 80000000);
 		
 		setContentView(R.layout.activity_main);
@@ -353,10 +359,24 @@ public class MainActivity extends ActionBarActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
-			return true;
+			Intent i = new Intent(this, UserSettingsActivity.class);
+            startActivityForResult(i, RESULT_SETTINGS);
+            return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+ 
+        switch (requestCode) {
+        case RESULT_SETTINGS:
+            break;
+ 
+        }
+ 
+    }
 
 	/**
 	 * A placeholder fragment containing a simple view.

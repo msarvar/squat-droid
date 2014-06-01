@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="Tracking" >
+        <ListPreference
+            	android:key="fitting_iterations"
+                android:title="Fitting Iterations"
+                android:summary="A higher value may give better tracking per frame, but a slower framerate. Default: 1"
+        		android:defaultValue="1"
+        		android:entries="@array/fittingIterations"
+        		android:entryValues="@array/fittingIterations"
+        		/>
+        		
+    </PreferenceCategory>
+
+</PreferenceScreen>
