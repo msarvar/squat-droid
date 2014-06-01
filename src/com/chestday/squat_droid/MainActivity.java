@@ -23,6 +23,8 @@ import com.chestday.squat_droid.squat.utils.android.VideoInputCamera;
 import com.chestday.squat_droid.squat.utils.android.VideoInputDummy;
 import com.chestday.squat_droid.squat.utils.android.VideoInputFile;
 
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -49,6 +51,7 @@ import android.widget.TextView;
 public class MainActivity extends ActionBarActivity {
 
 	private static final int RESULT_SETTINGS = 1;
+	private static final int RESULT_TTS_CHECK = 2;
 	
 	private Context context;
 	
@@ -92,7 +95,6 @@ public class MainActivity extends ActionBarActivity {
 		flipButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(direction == VideoBridge.LEFT_FACING) {
 					// Change to right facing
 					direction = VideoBridge.RIGHT_FACING;
@@ -340,12 +342,18 @@ public class MainActivity extends ActionBarActivity {
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 
+		// Start the text to speech check
+		Intent checkIntent = new Intent();
+		checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+		startActivityForResult(checkIntent, RESULT_TTS_CHECK);
+		
 		OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_5, this, loaderCallback);
 	}
 	
 	protected void onDestroy() {
 		super.onDestroy();
 		//Debug.stopMethodTracing();
+		Speaker.shutdown();
 	}
 
 	@Override
@@ -378,6 +386,18 @@ public class MainActivity extends ActionBarActivity {
         case RESULT_SETTINGS:
             break;
  
+        case RESULT_TTS_CHECK:
+        	if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                // success, create the TTS instance
+        		Speaker.init(this);
+        		
+            } else {
+                // missing data, install it
+                Intent installIntent = new Intent();
+                installIntent.setAction(
+                    TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installIntent);
+            }
         }
  
     }
