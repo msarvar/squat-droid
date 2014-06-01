@@ -25,11 +25,39 @@
         <ListPreference
             	android:key="fitting_iterations"
                 android:title="Fitting Iterations"
-                android:summary="A higher value may give better tracking per frame, but a slower framerate. Default: 1"
+                android:summary="A higher value may give better tracking per frame, but a slower framerate. 1 is usually best."
         		android:defaultValue="1"
         		android:entries="@array/fittingIterations"
         		android:entryValues="@array/fittingIterations"
         		/>
+        		
+    </PreferenceCategory>
+    
+    
+    <PreferenceCategory android:title="Background Removal" >
+
+        <ListPreference
+            	android:key="background_threshold"
+                android:title="Sensitivity"
+                android:summary="How sensitive the removal is to changes in colour. The higher the sensitivity, the less likely lighting changes will affect the background removal, but the more you must stand out from the background to be recognised."
+        		android:defaultValue="30"
+        		android:entries="@array/backgroundThreshold"
+        		android:entryValues="@array/backgroundThresholdValues"
+        		/>
+        
+        <CheckBoxPreference 
+            	android:key="remove_shadows"
+            	android:title="Remove Shadows"
+            	android:summary="Attempt to detect and remove shadows from the foreground. Good if you cast a visible shadow, but this is slightly slower."
+        		android:defaultValue="true"
+            />
+        
+         <CheckBoxPreference 
+            	android:key="largest_object"
+            	android:title="Largest Object"
+            	android:summary="Remove all but the largest object in the foreground. Good if there is more movement in the background, but this is slightly slower."
+        		android:defaultValue="true"
+            />
         		
     </PreferenceCategory>
     

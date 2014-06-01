@@ -17,7 +17,7 @@ import com.chestday.squat_droid.squat.model.event.ModelEventType;
 import com.chestday.squat_droid.squat.optimization.ModelFitter;
 import com.chestday.squat_droid.squat.optimization.ModelInitialisationFitterOptim;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
-import com.chestday.squat_droid.squat.utils.BackgroundSubtractorAdvanced;
+import com.chestday.squat_droid.squat.utils.BackgroundSubtractorLargestObject;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaive;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveHSV;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveShadow;
@@ -51,10 +51,19 @@ public class SquatPipeline {
 		if(videoInput.hasNextFrame()) {
 			firstFrame = videoInput.getNextFrame();
 		}
+
+		int bgThreshold = SquatPreferences.getIntValue("background_threshold");
 		
-		//VideoDisplay debugDisplay = new VideoDisplay("Debug", videoInput.getWidth(), videoInput.getHeight());
+		BackgroundSubtractor bg;
+		if(SquatPreferences.getBooleanValue("remove_shadows")) {
+			bg = new BackgroundSubtractorNaiveShadow(firstFrame, bgThreshold);
+		} else {
+			bg = new BackgroundSubtractorNaive(firstFrame, bgThreshold);
+		}
 		
-		BackgroundSubtractor bg = new BackgroundSubtractorAdvanced(firstFrame, 30);
+		if(SquatPreferences.getBooleanValue("largest_object")) {
+			bg = new BackgroundSubtractorLargestObject(firstFrame, bg);
+		}
 		
 		SquatSetup squatSetup = new SquatSetup(bg, firstFrame, listener);
 		Mat readyFrame = new Mat();

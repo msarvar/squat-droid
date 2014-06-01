@@ -28,4 +28,8 @@ public class SquatPreferences {
 	public static double getDoubleValue(String key) {
 		return Double.parseDouble(self.sharedPreferences.getString(key, "0"));
 	}
+	
+	public static boolean getBooleanValue(String key) {
+		return self.sharedPreferences.getBoolean(key, false);
+	}
 }

@@ -10,12 +10,12 @@ import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
-public class BackgroundSubtractorAdvanced implements BackgroundSubtractor {
+public class BackgroundSubtractorLargestObject implements BackgroundSubtractor {
 
-	private BackgroundSubtractorNaiveShadow bg;
+	private BackgroundSubtractor bg;
 	
-	public BackgroundSubtractorAdvanced(Mat background, double threshold) {
-		bg = new BackgroundSubtractorNaiveShadow(background, threshold);
+	public BackgroundSubtractorLargestObject(Mat background, BackgroundSubtractor bg) {
+		this.bg = bg;
 	}
 	
 	@Override
