@@ -7,6 +7,7 @@ import org.opencv.core.RotatedRect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 
+import com.chestday.squat_droid.SquatPreferences;
 import com.chestday.squat_droid.squat.utils.PointUtils;
 
 public class AngularModel implements Model {
@@ -25,6 +26,7 @@ public class AngularModel implements Model {
 	
 	// The position of the toe is fixed.
 	private Point foot;// = new Point(105, 280);
+	private boolean drawWeight = true;
 	
 	private double[] angles = new double[NUM_JOINTS];
 	private double[] lengths = new double[NUM_JOINTS];
@@ -37,6 +39,7 @@ public class AngularModel implements Model {
 		initialiseWidths();
 		initialiseLengths();
 		initialiseAngles();
+		drawWeight = SquatPreferences.getBooleanValue("with_weight");
 	}
 	
 	public void setScale(double scale) {
@@ -144,7 +147,9 @@ public class AngularModel implements Model {
 		}
 		
 		// Draw the bar on the lifter's back
-		Core.circle(m, points[SHOULDER_HIP], (int)(15 * scale), colour, -1);
+		if(drawWeight) {
+			Core.circle(m, points[SHOULDER_HIP], (int)(15 * scale), colour, -1);
+		}
 		
 		// Draw a small circle for the butt!
 		Core.circle(m, points[HIP_KNEE], (int)(2.5 * scale), colour, -1);

@@ -30,6 +30,13 @@
         		android:entries="@array/fittingIterations"
         		android:entryValues="@array/fittingIterations"
         		/>
+        
+        <CheckBoxPreference 
+            	android:key="with_weight"
+            	android:title="Squatting With Barbell"
+            	android:summary="Check this if you are squatting with a barbell with plates on your back."
+        		android:defaultValue="true"
+            />
         		
     </PreferenceCategory>
     
