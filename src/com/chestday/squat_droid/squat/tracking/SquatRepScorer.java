@@ -34,7 +34,10 @@ public class SquatRepScorer {
 	
 	private void addScore() {
 		if(scorer != null) {
-			scores.add(new Pair<Double,String>(scorer.getCurrentScore(), scorer.getMainContributor()));
+			double score = scorer.getCurrentScore();
+			String contributor = scorer.getMainContributor();
+			scores.add(new Pair<Double,String>(score, contributor));
+			SquatScoreSpeaker.speak(score, contributor);
 		}
 	}
 	

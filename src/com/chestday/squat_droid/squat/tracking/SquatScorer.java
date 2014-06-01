@@ -15,14 +15,14 @@ public class SquatScorer {
 	private Map<String, Double> maxPenalties;
 	
 	// Contributors that can lower the score
-	private static final String WEIGHT_DISTRIBUTION_FORWARD = "Weight Too Far Forward";
-	private static final String WEIGHT_DISTRIBUTION_BACKWARD = "Weight Too Far Backward";
-	private static final String BAD_BACK_ANGLE = "Bad Back Angle";
-	private static final String KNEES_FORWARD = "Knees Forward";
-	private static final String KNEES_BACKWARD = "Knees Backward";
-	private static final String FOOT_PLACEMENT = "Foot Placement";
-	private static final String ABOVE_PARALLEL = "Above Parallel";
-	private static final String NO_LOCKOUT = "No Lockout";
+	public static final String WEIGHT_DISTRIBUTION_FORWARD = "Weight Too Far Forward";
+	public static final String WEIGHT_DISTRIBUTION_BACKWARD = "Weight Too Far Backward";
+	public static final String BAD_BACK_ANGLE = "Bad Back Angle";
+	public static final String KNEES_FORWARD = "Knees Forward";
+	public static final String KNEES_BACKWARD = "Knees Backward";
+	public static final String FOOT_PLACEMENT = "Foot Placement";
+	public static final String ABOVE_PARALLEL = "Above Parallel";
+	public static final String NO_LOCKOUT = "No Lockout";
 	
 	private BadFrameCounter badFrameCounter;
 	private FrameCounter frameCounter;
