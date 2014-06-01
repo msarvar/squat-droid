@@ -213,8 +213,9 @@ public class MainActivity extends ActionBarActivity {
 			
 			@Override
 			public void onSquatBelowParallel() {
-				// TODO Auto-generated method stub
-				toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK);
+				if(SquatPreferences.getBooleanValue("parallel_beep")) {
+					toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK);
+				}
 			}
 			
 			public void onAscendStart() {
