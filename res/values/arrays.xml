@@ -6,4 +6,34 @@
         <item name="3">3</item>
         <item name="4">4</item>
     </string-array>
+    
+    <string-array name="motionThreshold">
+        <item name="0.5">As still as a statue</item>
+        <item name="1">Very still</item>
+        <item name="2">Pretty still</item>
+        <item name="3">A little wobbly</item>
+        <item name="4">Not very still</item>
+    </string-array>
+    
+    <string-array name="motionThresholdValues">
+        <item name="0.5">0.5</item>
+        <item name="1">1</item>
+        <item name="2">2</item>
+        <item name="3">3</item>
+        <item name="4">4</item>
+    </string-array>
+    
+     <string-array name="numDifferences">
+        <item name="6">Short</item>
+        <item name="8">Medium</item>
+        <item name="10">Long</item>
+        <item name="15">Ages</item>
+    </string-array>
+    
+    <string-array name="numDifferencesValues">
+        <item name="6">6</item>
+        <item name="8">8</item>
+        <item name="10">10</item>
+        <item name="15">15</item>
+    </string-array>
 </resources>

@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="Detection" >
+        <ListPreference
+            	android:key="motion_threshold"
+                android:title="Motion Sensitivity"
+                android:summary="How still you need to be to be detected."
+        		android:defaultValue="2"
+        		android:entries="@array/motionThreshold"
+        		android:entryValues="@array/motionThresholdValues"
+        		/>
+        
+        <ListPreference
+            	android:key="num_differences"
+                android:title="Detection Time"
+                android:summary="How long you need to stand still for to be detected."
+        		android:defaultValue="8"
+        		android:entries="@array/numDifferences"
+        		android:entryValues="@array/numDifferencesValues"
+        		/>
+        		
+    </PreferenceCategory>
+    
     <PreferenceCategory android:title="Tracking" >
         <ListPreference
             	android:key="fitting_iterations"

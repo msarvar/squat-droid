@@ -2,12 +2,13 @@ package com.chestday.squat_droid.squat.utils;
 
 import org.opencv.core.Mat;
 
+import com.chestday.squat_droid.SquatPreferences;
 import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
 
 public class MotionDetector {
 	private static final int FRAME_SKIP = 3;
-	private static final int NUM_DIFFERENCES = 8;
-	private static final double MOTION_THRESHOLD = 2;
+	private int NUM_DIFFERENCES = 8;
+	private double MOTION_THRESHOLD = 2;
 	
 	private FixedQueue<Double> differences;
 	private Mat prev;
@@ -16,6 +17,9 @@ public class MotionDetector {
 	private SquatPipelineListener listener;
 	
 	public MotionDetector(Mat initialFrame, SquatPipelineListener listener) {
+		MOTION_THRESHOLD = Double.parseDouble(SquatPreferences.getValue("motion_threshold"));
+		NUM_DIFFERENCES = Integer.parseInt(SquatPreferences.getValue("num_differences"));
+		
 		prev = initialFrame;
 		differences = new FixedQueue<Double>(NUM_DIFFERENCES);
 		this.listener = listener;
