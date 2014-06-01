@@ -36,4 +36,14 @@
         <item name="10">10</item>
         <item name="15">15</item>
     </string-array>
+    
+    <string-array name="displayMode">
+        <item name="1">Normal Video</item>
+        <item name="2">Background Removed</item>
+    </string-array>
+    
+    <string-array name="displayModeValues">
+        <item name="1">1</item>
+        <item name="2">2</item>
+    </string-array>
 </resources>

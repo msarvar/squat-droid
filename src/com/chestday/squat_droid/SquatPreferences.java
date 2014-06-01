@@ -17,7 +17,15 @@ public class SquatPreferences {
 		self = new SquatPreferences(context);
 	}
 	
-	public static String getValue(String key) {
+	public static String getStringValue(String key) {
 		return self.sharedPreferences.getString(key, "NULL");
+	}
+	
+	public static int getIntValue(String key) {
+		return Integer.parseInt(self.sharedPreferences.getString(key, "0"));
+	}
+	
+	public static double getDoubleValue(String key) {
+		return Double.parseDouble(self.sharedPreferences.getString(key, "0"));
 	}
 }

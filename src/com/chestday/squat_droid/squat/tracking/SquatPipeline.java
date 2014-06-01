@@ -8,6 +8,7 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
+import com.chestday.squat_droid.SquatPreferences;
 import com.chestday.squat_droid.squat.model.AngularModel;
 import com.chestday.squat_droid.squat.model.Model;
 import com.chestday.squat_droid.squat.model.event.ModelEventListener;
@@ -29,6 +30,10 @@ import com.chestday.squat_droid.squat.utils.VideoTools;
 
 public class SquatPipeline {
 	private static final int INIT_FITTING_ITERATIONS = 3;
+	
+	private static final int DISPLAY_MODE_NORMAL_VIDEO = 1;
+	private static final int DISPLAY_MODE_NO_BACKGROUND = 2;
+	
 	private VideoInput videoInput;
 	private VideoDisplay videoDisplay;
 	private SquatPipelineListener listener;
@@ -162,28 +167,23 @@ public class SquatPipeline {
 			
 			squatTracker.update(frame);
 			
-//			Mat m = new Mat(frame.size(), frame.type());
-//			Mat b = bg.subtract(frame);
-//			model.draw(m);
 			model.drawSkeleton(frame, modelColour);
 			
 			if(drawWeightDistroLine.get()) {
 				model.drawWeightDistributionLine(frame, new Scalar(255,0,0));
 			}
 			
-			
-			//Mat b2 = new Mat(frame.size(), frame.type());
-			//Imgproc.cvtColor(b, b2, Imgproc.COLOR_GRAY2BGRA);
-			//Mat blended = VideoTools.blend(frame, b2);
-			
-			videoDisplay.show(frame);
+			// Choose what to show depending on preferences
+			int displayMode = SquatPreferences.getIntValue("display_mode");
+			if(displayMode == DISPLAY_MODE_NORMAL_VIDEO) {
+				videoDisplay.show(frame);
+			} else { // displayMode == DISPLAY_MODE_NO_BACKGROUND
+				Mat noBgFrame = Mat.zeros(frame.size(), frame.type());
+				frame.copyTo(noBgFrame, bg.subtract(frame));
+				videoDisplay.show(noBgFrame);
+			}
 			videoDisplay.draw();
-			
-			//debugDisplay.show(bg.subtract(frame));
-			//debugDisplay.draw();
 		}
-		
-		//debugDisplay.close();
 		
 		squatTracker.stop();
 		

@@ -32,5 +32,17 @@
         		/>
         		
     </PreferenceCategory>
+    
+    <PreferenceCategory android:title="Display" >
+        <ListPreference
+            	android:key="display_mode"
+                android:title="Display Mode"
+                android:summary="What to show in the video feed"
+        		android:defaultValue="1"
+        		android:entries="@array/displayMode"
+        		android:entryValues="@array/displayModeValues"
+        		/>
+        		
+    </PreferenceCategory>
 
 </PreferenceScreen>

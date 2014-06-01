@@ -29,7 +29,7 @@ public class SquatTracker {
 	private FixedQueue<Boolean> footMovement;
 	
 	public SquatTracker(Model model, ModelEventManager modelEventManager, BackgroundSubtractor backgroundSubtractor) {
-		FITTING_ITERATIONS = Integer.parseInt(SquatPreferences.getValue("fitting_iterations"));
+		FITTING_ITERATIONS = SquatPreferences.getIntValue("fitting_iterations");
 		
 		squatScorer = new SquatRepScorer(modelEventManager);
 		sqrc = new SquatRepCounter(modelEventManager);
