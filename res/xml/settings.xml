@@ -91,10 +91,18 @@
     
     <PreferenceCategory android:title="Sound" >
         <CheckBoxPreference
+            	android:key="sound"
+                android:title="Sound"
+                android:summary="Play sounds"
+        		android:defaultValue="true"
+        		/>
+        
+        <CheckBoxPreference
             	android:key="parallel_beep"
                 android:title="Depth Beep"
                 android:summary="Beep to indicate when you've gone below parallel"
         		android:defaultValue="true"
+        		android:dependency="sound"
         		/>
         
         <CheckBoxPreference
@@ -102,6 +110,7 @@
                 android:title="Verbal Feedback"
                 android:summary="Instant verbal feedback on the quality of your squat"
         		android:defaultValue="true"
+        		android:dependency="sound"
         		/>
         		
     </PreferenceCategory>

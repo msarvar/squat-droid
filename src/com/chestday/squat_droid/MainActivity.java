@@ -203,7 +203,9 @@ public class MainActivity extends ActionBarActivity {
 			
 			public void onReadyToSquat() {
 				System.out.println("SQUAT: Ready to Squat!");
-				toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK);
+				if(SquatPreferences.getBooleanValue("sound")) {
+					toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK);
+				}
 			}
 
 			public void onInitialModelFit() {
@@ -213,7 +215,7 @@ public class MainActivity extends ActionBarActivity {
 			
 			@Override
 			public void onSquatBelowParallel() {
-				if(SquatPreferences.getBooleanValue("parallel_beep")) {
+				if(SquatPreferences.getBooleanValue("sound") && SquatPreferences.getBooleanValue("parallel_beep")) {
 					toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK);
 				}
 			}
