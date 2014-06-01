@@ -107,6 +107,10 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 		
+		// Set direction from default in settings
+		direction = SquatPreferences.getIntValue("default_direction");
+		flipButton.setImageResource(direction == VideoBridge.LEFT_FACING ? R.drawable.flipbuttonright : R.drawable.flipbuttonleft);
+		
 		startButton = (Button)findViewById(R.id.start_button);
 		startButton.setOnClickListener(new View.OnClickListener() {
 			

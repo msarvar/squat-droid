@@ -22,6 +22,22 @@
     </PreferenceCategory>
     
     <PreferenceCategory android:title="Tracking" >
+        <CheckBoxPreference 
+            	android:key="with_weight"
+            	android:title="Squatting With Barbell"
+            	android:summary="Check this if you are squatting with a barbell with plates on your back."
+        		android:defaultValue="true"
+            />
+        
+        <ListPreference
+            	android:key="default_direction"
+                android:title="Default Direction"
+                android:summary="Whether to assume you are facing left or right when the application starts. You can flip the direction with the arrow button on the main screen."
+        		android:defaultValue="1"
+        		android:entries="@array/defaultDirection"
+        		android:entryValues="@array/defaultDirectionValues"
+        		/>
+        
         <ListPreference
             	android:key="fitting_iterations"
                 android:title="Fitting Iterations"
@@ -30,13 +46,6 @@
         		android:entries="@array/fittingIterations"
         		android:entryValues="@array/fittingIterations"
         		/>
-        
-        <CheckBoxPreference 
-            	android:key="with_weight"
-            	android:title="Squatting With Barbell"
-            	android:summary="Check this if you are squatting with a barbell with plates on your back."
-        		android:defaultValue="true"
-            />
         		
     </PreferenceCategory>
     
@@ -76,6 +85,23 @@
         		android:defaultValue="1"
         		android:entries="@array/displayMode"
         		android:entryValues="@array/displayModeValues"
+        		/>
+        		
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="Sound" >
+        <CheckBoxPreference
+            	android:key="parallel_beep"
+                android:title="Depth Beep"
+                android:summary="Beep to indicate when you've gone below parallel"
+        		android:defaultValue="true"
+        		/>
+        
+        <CheckBoxPreference
+            	android:key="speech"
+                android:title="Verbal Feedback"
+                android:summary="Instant verbal feedback on the quality of your squat"
+        		android:defaultValue="true"
         		/>
         		
     </PreferenceCategory>
