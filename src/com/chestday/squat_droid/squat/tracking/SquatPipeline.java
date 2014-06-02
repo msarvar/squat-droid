@@ -22,6 +22,7 @@ import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaive;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveHSV;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveShadow;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorOpenCV;
+import com.chestday.squat_droid.squat.utils.MatManager;
 import com.chestday.squat_droid.squat.utils.MotionDetector;
 import com.chestday.squat_droid.squat.utils.Value;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
@@ -106,13 +107,12 @@ public class SquatPipeline {
 		// Initial fitting!!
 		ModelFitter initFit = new ModelInitialisationFitterOptim();
 		
-		Mat frm = new Mat();
 		if(videoInput.hasNextFrame()) {
-			frm = videoInput.getNextFrame();
+			readyFrame = videoInput.getNextFrame();
 		}
 		
 		for(int i = 0; i < INIT_FITTING_ITERATIONS; i++) {
-			initFit.fit(model, bg.subtract(frm));
+			initFit.fit(model, bg.subtract(readyFrame));
 		}
 		
 		listener.onInitialModelFit();
@@ -170,27 +170,29 @@ public class SquatPipeline {
 		SquatTracker squatTracker = new SquatTracker(model, modelEventManager, bg);
 		squatTracker.start();
 		
+		int displayMode = SquatPreferences.getIntValue("display_mode");
+
 		// Main loop
 		while(videoInput.hasNextFrame() && !squatTracker.finished()) {
 			Mat frame = videoInput.getNextFrame();
 			
 			squatTracker.update(frame);
 			
+			// Choose what to show depending on preferences
+			if(displayMode == DISPLAY_MODE_NO_BACKGROUND) {
+				Mat noBgFrame = MatManager.get("squat_pipeline_no_bg_frame", frame.rows(), frame.cols(), frame.type());
+				noBgFrame.setTo(new Scalar(0,0,0));
+				frame.copyTo(noBgFrame, bg.subtract(frame));
+				frame = noBgFrame;
+			}
+			
 			model.drawSkeleton(frame, modelColour);
 			
 			if(drawWeightDistroLine.get()) {
 				model.drawWeightDistributionLine(frame, new Scalar(255,0,0));
 			}
-			
-			// Choose what to show depending on preferences
-			int displayMode = SquatPreferences.getIntValue("display_mode");
-			if(displayMode == DISPLAY_MODE_NORMAL_VIDEO) {
-				videoDisplay.show(frame);
-			} else { // displayMode == DISPLAY_MODE_NO_BACKGROUND
-				Mat noBgFrame = Mat.zeros(frame.size(), frame.type());
-				frame.copyTo(noBgFrame, bg.subtract(frame));
-				videoDisplay.show(noBgFrame);
-			}
+
+			videoDisplay.show(frame);
 			videoDisplay.draw();
 		}
 		

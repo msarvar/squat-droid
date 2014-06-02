@@ -12,6 +12,7 @@ import org.opencv.core.Mat;
 
 import com.chestday.squat_droid.squat.tracking.SquatPipeline;
 import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
+import com.chestday.squat_droid.squat.utils.MatManager;
 import com.chestday.squat_droid.squat.utils.Pair;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
@@ -73,7 +74,7 @@ public class MainActivity extends ActionBarActivity {
         public void onManagerConnected(int status) {
             if (status == LoaderCallbackInterface.SUCCESS ) {
                 // now we can call opencv code !
-            	
+            	MatManager.init();
                 start();
             } else {
                 super.onManagerConnected(status);
