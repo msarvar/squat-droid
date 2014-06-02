@@ -19,7 +19,6 @@ import com.chestday.squat_droid.squat.utils.Pair;
 
 public class SquatTracker {
 	
-	private static int FITTING_ITERATIONS = 1;
 	private static final int FOOT_MOVEMENT_FRAMES = 6;
 	
 	private ModelFitter fitter;
@@ -31,7 +30,6 @@ public class SquatTracker {
 	private FixedQueue<Boolean> footMovement;
 	
 	public SquatTracker(Model model, ModelEventManager modelEventManager, BackgroundSubtractor backgroundSubtractor) {
-		FITTING_ITERATIONS = SquatPreferences.getIntValue("fitting_iterations");
 		
 		squatScorer = new SquatRepScorer(modelEventManager);
 		sqrc = new SquatRepCounter(modelEventManager);
@@ -56,9 +54,7 @@ public class SquatTracker {
 		Mat foreground = MatManager.get("squat_tracker_foreground", frame.rows(), frame.cols(), CvType.CV_8U);
 		bg.subtract(frame, foreground);
 		
-		for(int i = 0; i < FITTING_ITERATIONS; i++) {
-			fitter.fit(model, foreground);
-		}
+		fitter.fit(model, foreground);
 		
 		modelEventManager.update(model);
 		
