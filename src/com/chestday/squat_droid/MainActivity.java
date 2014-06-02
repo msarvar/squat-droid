@@ -239,6 +239,9 @@ public class MainActivity extends ActionBarActivity {
 				setText(startButton, "Reset");
 				
 				setStartButtonEnabled(true);
+				
+				// Now is a good time to garbage collect
+				System.gc();
 			}
 			
 			public void onFinish() {
