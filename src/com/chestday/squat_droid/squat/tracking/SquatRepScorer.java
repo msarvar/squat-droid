@@ -14,6 +14,7 @@ public class SquatRepScorer {
 	private List<Pair<Double,String>> scores;
 	private ModelEventManager modelEventManager;
 	private boolean stopped = false;
+	private boolean spokenScore = false;
 	
 	public SquatRepScorer(final ModelEventManager modelEventManager) {
 		scores = new ArrayList<Pair<Double,String>>();
@@ -30,6 +31,16 @@ public class SquatRepScorer {
 				}
 			}
 		});
+		
+		modelEventManager.addListener(ModelEventType.SQUAT_LOCKOUT_START, new ModelEventListener() {
+			public void onEvent(Model m) {
+				if(!stopped && scorer != null) {
+					scorer.setHasLockedOut();
+					SquatScoreSpeaker.speak(scorer.getCurrentScore(), scorer.getMainContributor());
+					spokenScore = true;
+				}
+			}
+		});
 	}
 	
 	private void addScore() {
@@ -37,7 +48,10 @@ public class SquatRepScorer {
 			double score = scorer.getCurrentScore();
 			String contributor = scorer.getMainContributor();
 			scores.add(new Pair<Double,String>(score, contributor));
-			SquatScoreSpeaker.speak(score, contributor);
+			if(!spokenScore) {
+				SquatScoreSpeaker.speak(score, contributor);
+			}
+			spokenScore = false;
 		}
 	}
 	

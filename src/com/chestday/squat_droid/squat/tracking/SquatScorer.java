@@ -116,8 +116,12 @@ public class SquatScorer {
 	
 	private class LockoutChecker implements ModelEventListener {
 		public void onEvent(Model m) {
-			contributors.put(NO_LOCKOUT, 0);
+			setHasLockedOut();
 		}
+	}
+	
+	public void setHasLockedOut() {
+		contributors.put(NO_LOCKOUT, 0);
 	}
 	
 	public double getCurrentScore() {
