@@ -11,6 +11,7 @@ import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveHSV;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorOpenCV;
+import com.chestday.squat_droid.squat.utils.MatManager;
 import com.chestday.squat_droid.squat.utils.Pair;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
@@ -34,8 +35,9 @@ public class SquatMainThread extends Thread {
 
 		// Dump the first few frames to ensure that we get a good white balance/exposure before fixing
 		int frameDumpCount = 0;
+		Mat frame = MatManager.get("squat_main__thread_frame");
 		while(frameDumpCount < 10 && videoInput.hasNextFrame()) {
-			videoInput.getNextFrame();
+			videoInput.getNextFrame(frame);
 			frameDumpCount++;
 		}
 		
@@ -43,8 +45,9 @@ public class SquatMainThread extends Thread {
 		
 		// This loop is for activating/deactivating the button - wait for still background
 		BackgroundSubtractor bg = new BackgroundSubtractorOpenCV(0.05, 10);
+
 		while(!listener.isStartButtonPressed() && videoInput.hasNextFrame()) {
-			Mat frame = videoInput.getNextFrame();
+			videoInput.getNextFrame(frame);
 			videoDisplay.show(frame);
 			videoDisplay.draw();			
 			Mat b = bg.subtract(frame);
@@ -65,7 +68,7 @@ public class SquatMainThread extends Thread {
 		
 		// Cycle through frames until we press reset
 		while(!listener.isStartButtonPressed() && videoInput.hasNextFrame()) {
-			Mat frame = videoInput.getNextFrame();
+			videoInput.getNextFrame(frame);
 			// Darken the frame to show the scores better
 			frame.convertTo(frame, frame.type(), 1, -100);
 			videoDisplay.show(frame);

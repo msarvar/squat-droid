@@ -25,4 +25,11 @@ public class MatManager {
 		}
 		return self.matMap.get(key);
 	}
+
+	public static Mat get(String key) {
+		if(!self.matMap.containsKey(key)) {
+			self.matMap.put(key, new Mat());
+		}
+		return self.matMap.get(key);
+	}
 }

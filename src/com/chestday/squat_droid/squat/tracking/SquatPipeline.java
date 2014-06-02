@@ -48,9 +48,9 @@ public class SquatPipeline {
 	public void process() {
 		final Scalar modelColour = new Scalar(255,255,255);
 		
-		Mat firstFrame = new Mat();
+		Mat firstFrame = MatManager.get("pipeline_first_frame");
 		if(videoInput.hasNextFrame()) {
-			firstFrame = videoInput.getNextFrame();
+			videoInput.getNextFrame(firstFrame);
 		}
 
 		int bgThreshold = SquatPreferences.getIntValue("background_threshold");
@@ -67,9 +67,9 @@ public class SquatPipeline {
 		}
 		
 		SquatSetup squatSetup = new SquatSetup(bg, firstFrame, listener);
-		Mat readyFrame = new Mat();
+		Mat readyFrame = MatManager.get("pipeline_ready_frame");
 		while(!squatSetup.ready() && videoInput.hasNextFrame()) {
-			readyFrame = videoInput.getNextFrame();
+			videoInput.getNextFrame(readyFrame);
 			videoDisplay.show(readyFrame);
 			videoDisplay.draw();
 			squatSetup.update(readyFrame);
@@ -108,7 +108,7 @@ public class SquatPipeline {
 		ModelFitter initFit = new ModelInitialisationFitterOptim();
 		
 		if(videoInput.hasNextFrame()) {
-			readyFrame = videoInput.getNextFrame();
+			videoInput.getNextFrame(readyFrame);
 		}
 		
 		for(int i = 0; i < INIT_FITTING_ITERATIONS; i++) {
@@ -172,9 +172,10 @@ public class SquatPipeline {
 		
 		int displayMode = SquatPreferences.getIntValue("display_mode");
 
+		Mat frame = MatManager.get("pipeline_main_frame");
 		// Main loop
 		while(videoInput.hasNextFrame() && !squatTracker.finished()) {
-			Mat frame = videoInput.getNextFrame();
+			videoInput.getNextFrame(frame);
 			
 			squatTracker.update(frame);
 			
@@ -183,7 +184,7 @@ public class SquatPipeline {
 				Mat noBgFrame = MatManager.get("squat_pipeline_no_bg_frame", frame.rows(), frame.cols(), frame.type());
 				noBgFrame.setTo(new Scalar(0,0,0));
 				frame.copyTo(noBgFrame, bg.subtract(frame));
-				frame = noBgFrame;
+				noBgFrame.copyTo(frame);
 			}
 			
 			model.drawSkeleton(frame, modelColour);

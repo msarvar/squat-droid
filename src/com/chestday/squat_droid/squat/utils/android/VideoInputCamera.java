@@ -33,11 +33,9 @@ public class VideoInputCamera implements VideoInput {
 		return success;
 	}
 	
-	public Mat getNextFrame() {
+	public void getNextFrame(Mat frame) {
 		if(frames.size() > 0) {
-			return frames.remove(0);
-		} else {
-			return null;
+			frames.remove(0).copyTo(frame);
 		}
 	}
 	

@@ -30,13 +30,11 @@ public class VideoInputFile implements VideoInput {
 	}
 
 	@Override
-	public Mat getNextFrame() {
+	public void getNextFrame(Mat frame) {
 		Bitmap bmp = retriever.getFrameAtTime(position, FFmpegMediaMetadataRetriever.OPTION_CLOSEST);
 		position += 100000;
-		Mat m = new Mat();
-		Utils.bitmapToMat(bmp, m);
-		Core.flip(m.t(), m, 1);
-		return m;
+		Utils.bitmapToMat(bmp, frame);
+		Core.flip(frame.t(), frame, 1);
 	}
 
 	@Override

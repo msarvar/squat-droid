@@ -52,7 +52,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	}
 
 	@Override
-	public synchronized Mat getNextFrame() {
+	public synchronized void getNextFrame(Mat frame) {
 		// TODO Auto-generated method stub
 		//System.out.println("Asked for frame");
 		
@@ -64,9 +64,9 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 				e.printStackTrace();
 			}
 		}
-		Mat inputFrameRef = inputFrame;
+		
+		inputFrame.copyTo(frame);
 		inputFrame = null;
-		return inputFrameRef;
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 		// TODO Auto-generated method stub
 		//System.out.println("Called show for a frame");
 		//this.outputFrame.release();
-		outputFrame = m;
+		m.copyTo(outputFrame);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	
 	@Override
 	public Mat onCameraFrame(CvCameraViewFrame inputFrame) {		
-		Mat m = new Mat();
+		Mat m = MatManager.get("video_bridge_m");
 		
 		inputFrame.rgba().convertTo(m, CvType.CV_8UC1);
 		
@@ -133,7 +133,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 			notify();
 		}
 		
-		Mat out = new Mat();
+		Mat out = MatManager.get("video_bridge_out");
 		this.outputFrame.convertTo(out, 24);
 		
 		if(direction == RIGHT_FACING) {

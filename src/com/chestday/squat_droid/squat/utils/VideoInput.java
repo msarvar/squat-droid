@@ -5,7 +5,7 @@ import org.opencv.core.Mat;
 public interface VideoInput {
 	public boolean hasNextFrame();
 	
-	public Mat getNextFrame();
+	public void getNextFrame(Mat m);
 	
 	public int getWidth();
 	

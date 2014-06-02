@@ -27,13 +27,11 @@ public class VideoInputDummy implements VideoInput {
 	}
 
 	@Override
-	public Mat getNextFrame() {
+	public void getNextFrame(Mat frame) {
 		// TODO Auto-generated method stub
-		Mat m = Mat.zeros(width, height, CvType.CV_8UC3);
 		Model model = new AngularModel(width/2, height/2);
-		model.draw(m, new Scalar(0,255,0));
+		model.draw(frame, new Scalar(0,255,0));
 		//Core.rectangle(m, new Point(width/2 + 10, height/2 + 10), new Point(width/2 - 10, height/2 - 10), new Scalar(255,0,0));
-		return m;
 	}
 
 	@Override
