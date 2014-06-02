@@ -199,12 +199,12 @@ public class AngularModel implements Model {
 
 	@Override
 	public boolean isSquatLockedOut() {
-		return angles[KNEE_ANKLE] > 75 &&
-			   angles[KNEE_ANKLE] < 95 &&
-			   angles[HIP_KNEE] > 85 &&
-			   angles[HIP_KNEE] < 110 &&
-			   angles[SHOULDER_HIP] > 75 &&
-			   angles[SHOULDER_HIP] < 100;
+		return angles[KNEE_ANKLE] > 70 &&
+			   angles[KNEE_ANKLE] < 100 &&
+			   angles[HIP_KNEE] > 80 &&
+			   angles[HIP_KNEE] < 115 &&
+			   angles[SHOULDER_HIP] > 70 &&
+			   angles[SHOULDER_HIP] < 105;
 	}
 
 	@Override
