@@ -15,11 +15,9 @@ public class BackgroundSubtractorOpenCV implements BackgroundSubtractor {
 		this.learningRate = learningRate;
 	}
 	
-	public Mat subtract(Mat frame) {
-		Mat rgb = new Mat();
+	public void subtract(Mat frame, Mat subtracted) {
+		Mat rgb = MatManager.get("bg_sub_opencv_rgb");
 		Imgproc.cvtColor(frame, rgb, Imgproc.COLOR_RGBA2RGB);
-		Mat mask = new Mat();
-		subtractor.apply(rgb, mask, learningRate);
-		return mask;
+		subtractor.apply(rgb, subtracted, learningRate);
 	}
 }

@@ -2,6 +2,7 @@ package com.chestday.squat_droid.squat.tracking;
 
 import java.util.List;
 
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
 import android.preference.PreferenceManager;
@@ -13,6 +14,7 @@ import com.chestday.squat_droid.squat.optimization.ModelFitter;
 import com.chestday.squat_droid.squat.optimization.ModelFitterOptim;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
 import com.chestday.squat_droid.squat.utils.FixedQueue;
+import com.chestday.squat_droid.squat.utils.MatManager;
 import com.chestday.squat_droid.squat.utils.Pair;
 
 public class SquatTracker {
@@ -51,7 +53,8 @@ public class SquatTracker {
 	}
 	
 	public void update(Mat frame) {
-		Mat foreground = bg.subtract(frame);
+		Mat foreground = MatManager.get("squat_tracker_foreground", frame.rows(), frame.cols(), CvType.CV_8U);
+		bg.subtract(frame, foreground);
 		
 		for(int i = 0; i < FITTING_ITERATIONS; i++) {
 			fitter.fit(model, foreground);

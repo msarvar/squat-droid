@@ -1,10 +1,12 @@
 package com.chestday.squat_droid.squat.tracking;
 
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
 import com.chestday.squat_droid.squat.utils.FigureDetector;
 import com.chestday.squat_droid.squat.utils.FixedQueue;
+import com.chestday.squat_droid.squat.utils.MatManager;
 import com.chestday.squat_droid.squat.utils.MotionDetector;
 import com.chestday.squat_droid.squat.utils.VideoTools;
 
@@ -19,13 +21,17 @@ public class SquatSetup {
 	
 	public SquatSetup(BackgroundSubtractor backgroundSubtractor, Mat initialFrame, SquatPipelineListener listener) {
 		bg = backgroundSubtractor;
-		motionDetector = new MotionDetector(bg.subtract(initialFrame), listener);
+		Mat initialFrameForeground = MatManager.get("squat_setup_initial_frame_foreground", initialFrame.rows(), initialFrame.cols(), CvType.CV_8U);
+		bg.subtract(initialFrame, initialFrameForeground);
+		motionDetector = new MotionDetector(initialFrameForeground, listener);
 		figureDetector = new FigureDetector();
 		this.listener = listener;
 	}
 	
 	public void update(Mat frame) {
-		Mat foreground = bg.subtract(frame);
+		// Cannot use mat manager here as we add mats to the motion detector
+		Mat foreground = new Mat(frame.size(), CvType.CV_8U);
+		bg.subtract(frame, foreground);
 		
 		if(figureDetector.hasFigure(foreground)) {
 			listener.squatSetupHasFigure();

@@ -19,21 +19,17 @@ public class BackgroundSubtractorLargestObject implements BackgroundSubtractor {
 	}
 	
 	@Override
-	public Mat subtract(Mat frame) {
-		Mat foreground = bg.subtract(frame);
+	public void subtract(Mat frame, Mat subtracted) {
+		bg.subtract(frame, subtracted);
 
-		MatOfPoint figure = VideoTools.largestObject(foreground);
-		if(figure == null) {
-			return foreground;
+		MatOfPoint figure = VideoTools.largestObject(subtracted);
+		
+		if(figure != null) {
+			subtracted.setTo(new Scalar(0,0,0));
+			List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+			contours.add(figure);
+			Imgproc.drawContours(subtracted, contours, 0, new Scalar(255,255,255), -1);
 		}
-		
-		Mat result = new Mat(foreground.size(), foreground.type());
-		result.setTo(new Scalar(0,0,0));
-		List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
-		contours.add(figure);
-		Imgproc.drawContours(result, contours, 0, new Scalar(255,255,255), -1);
-		
-		return result;
 	}
 
 }

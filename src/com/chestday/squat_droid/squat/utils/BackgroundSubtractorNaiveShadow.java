@@ -29,27 +29,26 @@ public class BackgroundSubtractorNaiveShadow implements BackgroundSubtractor {
 	}
 	
 	@Override
-	public Mat subtract(Mat frame) {
-		Mat foregroundWithShadow = bg.subtract(frame);
+	public void subtract(Mat frame, Mat subtracted) {
+		bg.subtract(frame, subtracted);
 		
-		Mat shadow = findShadowBgMog(frame);
-		Mat result = new Mat();
-		Core.subtract(foregroundWithShadow, shadow, result);
-		return result;
+		Mat shadow = MatManager.get("bg_sub_shadow");
+		findShadowBgMog(frame, shadow);
+		Core.subtract(subtracted, shadow, subtracted);
 	}
 	
-	private Mat findShadowBgMog(Mat frame) {
-		Mat rgb = new Mat();
+	private void findShadowBgMog(Mat frame, Mat shadow) {
+		Mat rgb = MatManager.get("bg_sub_shadow_rgb");
 		Imgproc.cvtColor(frame, rgb, Imgproc.COLOR_RGBA2RGB);
-		Mat b = new Mat();
+		Mat b = MatManager.get("bg_sub_shadow_b");
 		bgMog.apply(rgb, b);
-		Mat shadowAbove126 = new Mat();
-		Mat shadowBelow128 = new Mat();
+		Mat shadowAbove126 = MatManager.get("bg_sub_shadow_above_126");
+		Mat shadowBelow128 = MatManager.get("bg_sub_shadow_below_128");
+		
 		Imgproc.threshold(b, shadowAbove126, 126, 255, Imgproc.THRESH_BINARY);
 		Imgproc.threshold(b, shadowBelow128, 128, 255, Imgproc.THRESH_BINARY_INV);
-		Mat result = new Mat();
-		Core.bitwise_and(shadowBelow128, shadowAbove126, result);
-		return result;
+
+		Core.bitwise_and(shadowBelow128, shadowAbove126, shadow);
 	}
 	
 	private Mat findShadowHsv(Mat frame) {

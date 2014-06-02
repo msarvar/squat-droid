@@ -3,13 +3,13 @@ package com.chestday.squat_droid;
 import java.util.List;
 
 import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
 import com.chestday.squat_droid.squat.tracking.SquatPipeline;
 import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
-import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveHSV;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorOpenCV;
 import com.chestday.squat_droid.squat.utils.MatManager;
 import com.chestday.squat_droid.squat.utils.Pair;
@@ -49,8 +49,9 @@ public class SquatMainThread extends Thread {
 		while(!listener.isStartButtonPressed() && videoInput.hasNextFrame()) {
 			videoInput.getNextFrame(frame);
 			videoDisplay.show(frame);
-			videoDisplay.draw();			
-			Mat b = bg.subtract(frame);
+			videoDisplay.draw();
+			Mat b = MatManager.get("squat_main_thread_b", frame.rows(), frame.cols(), CvType.CV_8U);
+			bg.subtract(frame, b);
 			double percentage = VideoTools.percentageNonZero(b);
 			listener.onBackgroundStationary(percentage < 0.3);
 		}

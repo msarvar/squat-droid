@@ -1,6 +1,7 @@
 package com.chestday.squat_droid.squat.tracking;
 
 import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
@@ -19,7 +20,6 @@ import com.chestday.squat_droid.squat.optimization.ModelInitialisationFitterOpti
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorLargestObject;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaive;
-import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveHSV;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveShadow;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorOpenCV;
 import com.chestday.squat_droid.squat.utils.MatManager;
@@ -73,8 +73,6 @@ public class SquatPipeline {
 			videoDisplay.show(readyFrame);
 			videoDisplay.draw();
 			squatSetup.update(readyFrame);
-			//debugDisplay.show(bg.subtract(readyFrame));
-			//debugDisplay.draw();
 		}
 		
 		listener.onReadyToSquat();
@@ -82,7 +80,8 @@ public class SquatPipeline {
 		// We have got to the point where the lifter is ready to squat
 		
 		// Find where to put the model and how large to make it
-		Mat readyForeground = bg.subtract(readyFrame);
+		Mat readyForeground = MatManager.get("squat_pipeline_ready_foreground", readyFrame.rows(), readyFrame.cols(), CvType.CV_8U);
+		bg.subtract(readyFrame, readyForeground);
 		
 		// Calculate the height and centre point of the foreground blob - ie. the figure
 		MatOfPoint figureContours = VideoTools.largestObject(readyForeground);
@@ -111,8 +110,10 @@ public class SquatPipeline {
 			videoInput.getNextFrame(readyFrame);
 		}
 		
+		Mat initFitBackground = MatManager.get("squat_pipeline_init_fit_background", readyFrame.rows(), readyFrame.cols(), CvType.CV_8U);
 		for(int i = 0; i < INIT_FITTING_ITERATIONS; i++) {
-			initFit.fit(model, bg.subtract(readyFrame));
+			bg.subtract(readyFrame, initFitBackground);
+			initFit.fit(model, initFitBackground);
 		}
 		
 		listener.onInitialModelFit();
@@ -183,7 +184,9 @@ public class SquatPipeline {
 			if(displayMode == DISPLAY_MODE_NO_BACKGROUND) {
 				Mat noBgFrame = MatManager.get("squat_pipeline_no_bg_frame", frame.rows(), frame.cols(), frame.type());
 				noBgFrame.setTo(new Scalar(0,0,0));
-				frame.copyTo(noBgFrame, bg.subtract(frame));
+				Mat foreground = MatManager.get("squat_pipeline_foreground", frame.rows(), frame.cols(), CvType.CV_8U);
+				bg.subtract(frame, foreground);
+				frame.copyTo(noBgFrame, foreground);
 				noBgFrame.copyTo(frame);
 			}
 			
