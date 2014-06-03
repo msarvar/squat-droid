@@ -82,7 +82,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	}
 
 	@Override
-	public void show(Mat m) {
+	public synchronized void show(Mat m) {
 		// TODO Auto-generated method stub
 		//System.out.println("Called show for a frame");
 		//this.outputFrame.release();
@@ -134,8 +134,10 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 		}
 		
 		Mat out = MatManager.get("video_bridge_out");
-		this.outputFrame.convertTo(out, 24);
-		
+		synchronized (this) {
+			this.outputFrame.convertTo(out, 24);
+		}
+
 		if(direction == RIGHT_FACING) {
 			Core.flip(out, out, 1);
 		}
