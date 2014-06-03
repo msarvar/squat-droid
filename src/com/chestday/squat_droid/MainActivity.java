@@ -181,6 +181,7 @@ public class MainActivity extends ActionBarActivity {
 				// Reset start button state
 				startButtonPressed = false;
 				setText(mainTextView, "Walk into view");
+				setText(startButton, "Started");
 				setStartButtonEnabled(false);
 			}
 			
