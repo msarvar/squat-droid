@@ -87,7 +87,7 @@ public class SquatScoreSpeaker {
 		String text = "";
 		
 		if(SquatPreferences.getBooleanValue("count_reps")) {
-			text += rep + ".";
+			text += rep + ". ";
 		}
 		
 		if(score < 30) {
