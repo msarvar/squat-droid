@@ -48,7 +48,7 @@ public class SquatRepScorer {
 			double score = scorer.getCurrentScore();
 			String contributor = scorer.getMainContributor();
 			scores.add(new Pair<Double,String>(score, contributor));
-			if(!spokenScore) {
+			if(!spokenScore && !stopped) {
 				SquatScoreSpeaker.speak(score, contributor);
 			}
 			spokenScore = false;
