@@ -97,6 +97,14 @@
         		/>
         
         <CheckBoxPreference
+            	android:key="count_reps"
+                android:title="Count Reps"
+                android:summary="Count your reps!"
+        		android:defaultValue="true"
+        		android:dependency="sound"
+        		/>
+        
+        <CheckBoxPreference
             	android:key="speech"
                 android:title="Verbal Feedback"
                 android:summary="Instant verbal feedback on the quality of your squat"

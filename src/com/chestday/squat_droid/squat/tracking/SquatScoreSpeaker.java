@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.chestday.squat_droid.Speaker;
+import com.chestday.squat_droid.SquatPreferences;
 
 public class SquatScoreSpeaker {
 	
@@ -82,8 +83,13 @@ public class SquatScoreSpeaker {
 		});
 	}
 	
-	public static void speak(double score, String contributor) {
+	public static void speak(int rep, double score, String contributor) {
 		String text = "";
+		
+		if(SquatPreferences.getBooleanValue("count_reps")) {
+			text += rep + ".";
+		}
+		
 		if(score < 30) {
 			text += "Bad.";
 		} else if(score < 50) {
