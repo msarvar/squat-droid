@@ -183,6 +183,9 @@ public class MainActivity extends ActionBarActivity {
 				setText(mainTextView, "Walk into view");
 				setText(startButton, "Started");
 				setStartButtonEnabled(false);
+				if(SquatPreferences.getBooleanValue("vocal_instructions")) {
+					Speaker.speak("Walk into view and stand still.");
+				}
 			}
 			
 			@Override
@@ -213,6 +216,9 @@ public class MainActivity extends ActionBarActivity {
 			public void onInitialModelFit() {
 				System.out.println("SQUAT: Initial Model Fitted");
 				setText(mainTextView, "Squat!");
+				if(SquatPreferences.getBooleanValue("vocal_instructions")) {
+					Speaker.speak("Start squatting when ready!");
+				}
 			}
 			
 			@Override
