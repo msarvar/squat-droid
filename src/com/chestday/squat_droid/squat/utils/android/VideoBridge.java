@@ -46,21 +46,15 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	
 	@Override
 	public boolean hasNextFrame() {
-		// TODO Auto-generated method stub
-		//System.out.println("Do we have a frame? " + inputFrame != null ? "Yes" : "No");
 		return true;
 	}
 
 	@Override
 	public synchronized void getNextFrame(Mat frame) {
-		// TODO Auto-generated method stub
-		//System.out.println("Asked for frame");
-		
 		while(inputFrame == null) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -71,40 +65,31 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 
 	@Override
 	public int getWidth() {
-		// TODO Auto-generated method stub
 		return width;
 	}
 
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
 		return height;
 	}
 
 	@Override
 	public synchronized void show(Mat m) {
-		// TODO Auto-generated method stub
-		//System.out.println("Called show for a frame");
-		//this.outputFrame.release();
 		m.copyTo(outputFrame);
 	}
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void close() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void onCameraViewStarted(int width, int height) {
-		// TODO Auto-generated method stub
-		System.out.println("Started camera view");
 		this.width = width;
 		this.height = height;
 		outputFrame = MatManager.get("video_bridge_output_frame", height, width, CvType.CV_8UC1);
@@ -112,8 +97,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 
 	@Override
 	public void onCameraViewStopped() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	private boolean started = false;
