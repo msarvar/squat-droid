@@ -99,13 +99,13 @@
         <CheckBoxPreference
             	android:key="count_reps"
                 android:title="Count Reps"
-                android:summary="Count your reps!"
+                android:summary="Count your reps so you don't have to!"
         		android:defaultValue="true"
         		android:dependency="sound"
         		/>
         
         <CheckBoxPreference
-            	android:key="speech"
+            	android:key="vocal_feedback"
                 android:title="Verbal Feedback"
                 android:summary="Instant verbal feedback on the quality of your squat"
         		android:defaultValue="true"

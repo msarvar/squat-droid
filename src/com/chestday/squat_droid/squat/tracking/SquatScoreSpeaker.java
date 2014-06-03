@@ -90,25 +90,27 @@ public class SquatScoreSpeaker {
 			text += rep + ". ";
 		}
 		
-		if(score < 30) {
-			text += "Not very good.";
-		} else if(score < 50) {
-			text += "Ok.";
-		} else if(score < 70) {
-			text += "Good.";
-		} else if(score < 90) {
-			text += "Very Good.";
-		} else if(score < 100) {
-			text += "Excellent.";
-		} else {
-			text += "Perfect.";
+		if(SquatPreferences.getBooleanValue("vocal_feedback")) {
+			if(score < 30) {
+				text += "Not very good.";
+			} else if(score < 50) {
+				text += "Ok.";
+			} else if(score < 70) {
+				text += "Good.";
+			} else if(score < 90) {
+				text += "Very Good.";
+			} else if(score < 100) {
+				text += "Excellent.";
+			} else {
+				text += "Perfect.";
+			}
+			
+			// Tips!
+			if(score < 90) {
+				text += " " + randomPhrase(contributor);
+			}
 		}
-		
-		// Tips!
-		if(score < 90) {
-			text += " " + randomPhrase(contributor);
-		}
-		
+
 		Speaker.speak(text);
 	}
 	
