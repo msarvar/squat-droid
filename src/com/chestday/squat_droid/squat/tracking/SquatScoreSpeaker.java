@@ -91,7 +91,7 @@ public class SquatScoreSpeaker {
 		}
 		
 		if(score < 30) {
-			text += "Bad.";
+			text += "Not very good.";
 		} else if(score < 50) {
 			text += "Ok.";
 		} else if(score < 70) {
