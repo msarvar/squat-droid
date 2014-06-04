@@ -208,7 +208,7 @@ public class MainActivity extends ActionBarActivity {
 			
 			public void onReadyToSquat() {
 				System.out.println("SQUAT: Ready to Squat!");
-				if(SquatPreferences.getBooleanValue("sound")) {
+				if(SquatPreferences.getBooleanValue("sound") && SquatPreferences.getBooleanValue("detect_beep")) {
 					toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK);
 				}
 			}

@@ -97,6 +97,14 @@
         		/>
         
         <CheckBoxPreference
+            	android:key="detect_beep"
+                android:title="Detection Beep"
+                android:summary="Beep when you have been detected and may start squatting"
+        		android:defaultValue="true"
+        		android:dependency="sound"
+        		/>
+        
+        <CheckBoxPreference
             	android:key="count_reps"
                 android:title="Count Reps"
                 android:summary="Count your reps so you don't have to!"
