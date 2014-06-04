@@ -193,7 +193,7 @@ public class MainActivity extends ActionBarActivity {
 				setText(startButton, "Started");
 				setStartButtonEnabled(false);
 				if(SquatPreferences.getBooleanValue("vocal_instructions")) {
-					Speaker.speak("Walk into view and stand still.");
+					Speaker.speak("Walk into view and stand still facing " + (direction == VideoBridge.LEFT_FACING ? "left" : "right") + ".");
 				}
 			}
 			
