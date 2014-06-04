@@ -75,7 +75,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:adjustViewBounds="true"
-            android:src="@drawable/flipbuttonright" />
+            android:src="@drawable/squat_left_blue" />
 
     </LinearLayout>
     

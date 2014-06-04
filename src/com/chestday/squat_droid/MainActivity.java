@@ -99,7 +99,7 @@ public class MainActivity extends ActionBarActivity {
 				if(direction == VideoBridge.LEFT_FACING) {
 					// Change to right facing
 					direction = VideoBridge.RIGHT_FACING;
-					flipButton.setImageResource(R.drawable.flipbuttonleft);
+					flipButton.setImageResource(R.drawable.squat_right_blue);
 					
 					if(SquatPreferences.getBooleanValue("vocal_instructions")) {
 						Speaker.speak("Face right.");
@@ -107,7 +107,7 @@ public class MainActivity extends ActionBarActivity {
 				} else {
 					// Change to left facing
 					direction = VideoBridge.LEFT_FACING;
-					flipButton.setImageResource(R.drawable.flipbuttonright);
+					flipButton.setImageResource(R.drawable.squat_left_blue);
 					
 					if(SquatPreferences.getBooleanValue("vocal_instructions")) {
 						Speaker.speak("Face left.");
@@ -120,7 +120,7 @@ public class MainActivity extends ActionBarActivity {
 		
 		// Set direction from default in settings
 		direction = SquatPreferences.getIntValue("default_direction");
-		flipButton.setImageResource(direction == VideoBridge.LEFT_FACING ? R.drawable.flipbuttonright : R.drawable.flipbuttonleft);
+		flipButton.setImageResource(direction == VideoBridge.LEFT_FACING ? R.drawable.squat_left_blue : R.drawable.squat_right_blue);
 		
 		startButton = (Button)findViewById(R.id.start_button);
 		startButton.setOnClickListener(new View.OnClickListener() {
