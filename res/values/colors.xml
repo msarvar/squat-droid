@@ -3,5 +3,9 @@
 
     <color name="white">#ffffff</color>
 	<color name="squat_blue">#0e53a7</color>
+	<color name="squat_blue_light">#6899d3</color>
+	<color name="squat_blue_mid_light">#4284d3</color>
+	<color name="squat_blue_mid_dark">#274e7d</color>
+	<color name="squat_blue_dark">#04346c</color>
     
 </resources>
