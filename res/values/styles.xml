@@ -15,10 +15,16 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:actionBarStyle">@style/SquatActionBar</item>
     </style>
     
     <style name="ScoreTable" parent="@android:style/TextAppearance.Large">
         <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="SquatActionBar"
+           parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/squat_blue</item>
     </style>
 
 </resources>
