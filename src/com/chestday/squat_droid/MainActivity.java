@@ -102,7 +102,7 @@ public class MainActivity extends ActionBarActivity {
 					flipButton.setImageResource(R.drawable.flipbuttonleft);
 					
 					if(SquatPreferences.getBooleanValue("vocal_instructions")) {
-						Speaker.speak("Face right when squatting.");
+						Speaker.speak("Face right.");
 					}
 				} else {
 					// Change to left facing
@@ -110,7 +110,7 @@ public class MainActivity extends ActionBarActivity {
 					flipButton.setImageResource(R.drawable.flipbuttonright);
 					
 					if(SquatPreferences.getBooleanValue("vocal_instructions")) {
-						Speaker.speak("Face left when squatting.");
+						Speaker.speak("Face left.");
 					}
 				}
 				
