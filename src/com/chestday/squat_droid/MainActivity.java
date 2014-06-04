@@ -62,7 +62,6 @@ public class MainActivity extends ActionBarActivity {
 	private PortraitCameraView mOpenCvCameraView;
 	
 	private ImageView flipButton;
-	private int direction = VideoBridge.LEFT_FACING;
 	
 	private TextView mainTextView;
 	private TableLayout scoresTable;
@@ -91,37 +90,7 @@ public class MainActivity extends ActionBarActivity {
 		mainTextView = (TextView)findViewById(R.id.main_text);
 		
 		scoresTable = (TableLayout)findViewById(R.id.score_table);
-		
-		flipButton = (ImageView)findViewById(R.id.flip_image_view);
-		flipButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(direction == VideoBridge.LEFT_FACING) {
-					// Change to right facing
-					direction = VideoBridge.RIGHT_FACING;
-					flipButton.setImageResource(R.drawable.squat_right_blue);
-					
-					if(SquatPreferences.getBooleanValue("vocal_instructions")) {
-						Speaker.speak("Face right.");
-					}
-				} else {
-					// Change to left facing
-					direction = VideoBridge.LEFT_FACING;
-					flipButton.setImageResource(R.drawable.squat_left_blue);
-					
-					if(SquatPreferences.getBooleanValue("vocal_instructions")) {
-						Speaker.speak("Face left.");
-					}
-				}
-				
-				videoBridge.setDirection(direction);
-			}
-		});
-		
-		// Set direction from default in settings
-		direction = SquatPreferences.getIntValue("default_direction");
-		flipButton.setImageResource(direction == VideoBridge.LEFT_FACING ? R.drawable.squat_left_blue : R.drawable.squat_right_blue);
-		
+
 		startButton = (Button)findViewById(R.id.start_button);
 		startButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -135,6 +104,30 @@ public class MainActivity extends ActionBarActivity {
 		toneGenerator = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
 		
 		videoBridge = new VideoBridge();
+		
+		flipButton = (ImageView)findViewById(R.id.flip_image_view);
+		flipButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(videoBridge.getDirection() == VideoBridge.LEFT_FACING) {
+					// Change to right facing
+					videoBridge.setDirection(VideoBridge.RIGHT_FACING);
+					flipButton.setImageResource(R.drawable.squat_right_blue);
+					
+					if(SquatPreferences.getBooleanValue("vocal_instructions")) {
+						Speaker.speak("Face right.");
+					}
+				} else {
+					// Change to left facing
+					videoBridge.setDirection(VideoBridge.LEFT_FACING);
+					flipButton.setImageResource(R.drawable.squat_left_blue);
+					
+					if(SquatPreferences.getBooleanValue("vocal_instructions")) {
+						Speaker.speak("Face left.");
+					}
+				}
+			}
+		});
 		
 		squat = makeSquatMainThread();
 		
@@ -193,7 +186,7 @@ public class MainActivity extends ActionBarActivity {
 				setText(startButton, "Started");
 				setStartButtonEnabled(false);
 				if(SquatPreferences.getBooleanValue("vocal_instructions")) {
-					Speaker.speak("Walk into view and stand still facing " + (direction == VideoBridge.LEFT_FACING ? "left" : "right") + ".");
+					Speaker.speak("Walk into view and stand still, facing " + (videoBridge.getDirection() == VideoBridge.LEFT_FACING ? "left" : "right") + ".");
 				}
 			}
 			

@@ -44,6 +44,10 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 		this.direction = direction;
 	}
 	
+	public int getDirection() {
+		return this.direction;
+	}
+	
 	@Override
 	public boolean hasNextFrame() {
 		return true;

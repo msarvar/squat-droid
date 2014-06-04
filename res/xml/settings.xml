@@ -28,15 +28,6 @@
             	android:summary="Check this if you are squatting with a barbell with plates on your back."
         		android:defaultValue="true"
             />
-        
-        <ListPreference
-            	android:key="default_direction"
-                android:title="Default Direction"
-                android:summary="Whether to assume you are facing left or right when the application starts. You can flip the direction with the arrow button on the main screen."
-        		android:defaultValue="1"
-        		android:entries="@array/defaultDirection"
-        		android:entryValues="@array/defaultDirectionValues"
-        		/>
         		
     </PreferenceCategory>
     
