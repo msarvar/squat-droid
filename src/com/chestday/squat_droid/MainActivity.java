@@ -182,6 +182,7 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onBackgroundStationary(boolean isStationary) {
 				setText(mainTextView, isStationary ? "Press Start" : "Ensure surroundings are still");
+				setText(startButton, isStationary ? "Start" : "Wait...");
 				setStartButtonEnabled(isStationary);
 			}
 			
