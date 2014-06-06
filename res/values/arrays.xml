@@ -48,11 +48,11 @@
     </string-array>
     
     <string-array name="backgroundThreshold">
-        <item name="10">Very Low</item>
-        <item name="20">Low</item>
+        <item name="10">Very High</item>
+        <item name="20">High</item>
         <item name="30">Medium</item>
-        <item name="40">High</item>
-        <item name="50">Very High</item>
+        <item name="40">Low</item>
+        <item name="50">Very Low</item>
     </string-array>
     
     <string-array name="backgroundThresholdValues">

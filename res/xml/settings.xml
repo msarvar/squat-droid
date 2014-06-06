@@ -37,7 +37,7 @@
         <ListPreference
             	android:key="background_threshold"
                 android:title="Sensitivity"
-                android:summary="How sensitive the removal is to changes in colour. The higher the sensitivity, the less likely lighting changes will affect the background removal, but the more you must stand out from the background to be recognised."
+                android:summary="Adjust how sensitive we are to changes in colour. The lower the sensitivity, the more you must stand out from the background to be recognised."
         		android:defaultValue="30"
         		android:entries="@array/backgroundThreshold"
         		android:entryValues="@array/backgroundThresholdValues"
