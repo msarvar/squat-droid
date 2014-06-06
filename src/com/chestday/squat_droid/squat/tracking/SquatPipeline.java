@@ -91,7 +91,7 @@ public class SquatPipeline {
 		
 		// Initialise the model in a sensible location
 		AngularModel model = new AngularModel(figureCentre.x + figureBound.width / 2, figureCentre.y + figureHeight / 2);
-		Mat modelScaleMat = new Mat(readyForeground.size(), readyForeground.type());
+		Mat modelScaleMat = MatManager.get("squat_pipeline_model_scale_mat", readyForeground.rows(), readyForeground.cols(), readyForeground.type());
 		model.draw(modelScaleMat);
 		
 		// Calculate the height of the model
