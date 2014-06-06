@@ -82,7 +82,7 @@ public class VideoTools {
 	}
 	
 	public static int numberOverlappingPixels(Mat m1, Mat m2) {
-		Mat res = new Mat();
+		Mat res = MatManager.get("video_tools_overlap_result");
 		int overlap = 0;
 		try {
 			Core.bitwise_and(m1, m2, res);
