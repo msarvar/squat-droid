@@ -4,6 +4,7 @@ import org.apache.commons.math3.analysis.MultivariateFunction;
 import org.opencv.core.Mat;
 
 import com.chestday.squat_droid.squat.model.Model;
+import com.chestday.squat_droid.squat.utils.MatManager;
 import com.chestday.squat_droid.squat.utils.VideoTools;
 
 public class ModelFitFunction implements MultivariateFunction {
@@ -15,7 +16,7 @@ public class ModelFitFunction implements MultivariateFunction {
 	public ModelFitFunction(Mat frame, Model model) {
 		this.frame = frame;
 		this.model = model;
-		this.m = new Mat(frame.size(), frame.type());
+		this.m = MatManager.get("model_fit_function_m", frame.rows(), frame.cols(), frame.type());
 	}
 	
 	@Override
