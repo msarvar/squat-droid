@@ -3,8 +3,6 @@ package com.chestday.squat_droid.squat.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;

@@ -6,8 +6,6 @@ import org.opencv.core.Mat;
 
 import wseemann.media.FFmpegMediaMetadataRetriever;
 import android.graphics.Bitmap;
-import android.media.MediaMetadataRetriever;
-
 import com.chestday.squat_droid.squat.utils.VideoInput;
 
 public class VideoInputFile implements VideoInput {

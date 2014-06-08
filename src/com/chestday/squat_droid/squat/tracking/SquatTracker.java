@@ -5,9 +5,6 @@ import java.util.List;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
-import android.preference.PreferenceManager;
-
-import com.chestday.squat_droid.SquatPreferences;
 import com.chestday.squat_droid.squat.model.Model;
 import com.chestday.squat_droid.squat.model.event.ModelEventManager;
 import com.chestday.squat_droid.squat.optimization.ModelFitter;

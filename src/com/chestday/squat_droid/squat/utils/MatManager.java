@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.opencv.core.Mat;
-import org.opencv.core.Size;
 
 public class MatManager {
 	private static MatManager self;

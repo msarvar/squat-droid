@@ -66,7 +66,7 @@
             android:layout_weight="0.65"
             android:background="@drawable/squat_button"
             android:enabled="false"
-            android:text="Start"
+            android:text="@string/start"
             android:textColor="@color/white" />
         
         <ImageView

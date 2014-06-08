@@ -1,33 +1,21 @@
 package com.chestday.squat_droid;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Mat;
 
-import com.chestday.squat_droid.squat.tracking.SquatPipeline;
 import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
 import com.chestday.squat_droid.squat.utils.MatManager;
 import com.chestday.squat_droid.squat.utils.Pair;
-import com.chestday.squat_droid.squat.utils.VideoDisplay;
-import com.chestday.squat_droid.squat.utils.VideoInput;
 import com.chestday.squat_droid.squat.utils.android.PortraitCameraView;
 import com.chestday.squat_droid.squat.utils.android.VideoBridge;
 import com.chestday.squat_droid.squat.utils.android.VideoBridge.VideoBridgeReadyCallback;
-import com.chestday.squat_droid.squat.utils.android.VideoDisplayAndroid;
-import com.chestday.squat_droid.squat.utils.android.VideoInputCamera;
-import com.chestday.squat_droid.squat.utils.android.VideoInputDummy;
-import com.chestday.squat_droid.squat.utils.android.VideoInputFile;
 
 import android.speech.tts.TextToSpeech;
-import android.speech.tts.TextToSpeech.OnInitListener;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -35,14 +23,12 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
-import android.os.Debug;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -240,7 +226,7 @@ public class MainActivity extends ActionBarActivity {
 				addScoreRow(new String[]{"Rep", "Score", "Problem"}, Color.WHITE);
 				
 				for(int i = 0; i < scores.size(); i++) {
-					String scorePercentage = String.format("%.1f", scores.get(i).l);
+					String scorePercentage = String.format(Locale.getDefault(), "%.1f", scores.get(i).l);
 					addScoreRow(new String[]{Integer.toString(i+1), scorePercentage, scores.get(i).r}, percentageToColour(scores.get(i).l));
 				}
 				

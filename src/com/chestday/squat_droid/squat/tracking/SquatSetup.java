@@ -5,10 +5,8 @@ import org.opencv.core.Mat;
 
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
 import com.chestday.squat_droid.squat.utils.FigureDetector;
-import com.chestday.squat_droid.squat.utils.FixedQueue;
 import com.chestday.squat_droid.squat.utils.MatManager;
 import com.chestday.squat_droid.squat.utils.MotionDetector;
-import com.chestday.squat_droid.squat.utils.VideoTools;
 
 public class SquatSetup {
 	

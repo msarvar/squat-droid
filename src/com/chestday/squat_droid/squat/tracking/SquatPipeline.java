@@ -1,6 +1,5 @@
 package com.chestday.squat_droid.squat.tracking;
 
-import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
@@ -21,9 +20,7 @@ import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorLargestObject;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaive;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveShadow;
-import com.chestday.squat_droid.squat.utils.BackgroundSubtractorOpenCV;
 import com.chestday.squat_droid.squat.utils.MatManager;
-import com.chestday.squat_droid.squat.utils.MotionDetector;
 import com.chestday.squat_droid.squat.utils.Value;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
 import com.chestday.squat_droid.squat.utils.VideoInput;
