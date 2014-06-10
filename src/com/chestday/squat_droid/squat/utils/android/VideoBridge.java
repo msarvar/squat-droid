@@ -71,7 +71,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	}
 
 	@Override
-	public synchronized void show(Mat m) {
+	public void show(Mat m) {
 		m.copyTo(outputFrame);
 	}
 

@@ -24,11 +24,11 @@ public class Speaker implements OnInitListener {
 		self.tts.shutdown();
 	}
 	
-	public static void speak(String text) {
+	public static void speak(final String text) {
 		boolean sound = SquatPreferences.getBooleanValue("sound");
 		
 		if(self.ready && sound) {
-			self.tts.speak(text, TextToSpeech.QUEUE_ADD, null);
+			self.tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
 		}
 	}
 

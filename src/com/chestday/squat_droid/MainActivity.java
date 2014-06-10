@@ -134,7 +134,8 @@ public class MainActivity extends ActionBarActivity {
 		//VideoInput videoInput = new VideoInputFile("/storage/extSdCard/Video/Squat/good_squats.avi");
 		//VideoInput videoInput = new VideoInputDummy(imageView.getWidth(),imageView.getHeight());
 
-		
+        // Now is a good time to garbage collect - before we start tracking!
+		System.gc();
 	}
 	
 	private SquatMainThread makeSquatMainThread() {
