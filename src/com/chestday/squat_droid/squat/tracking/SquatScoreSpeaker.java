@@ -81,6 +81,14 @@ public class SquatScoreSpeaker {
 			"Make sure the bar stays directly above your feet.",
 			"The bar was not directly above your feet.",
 		});
+		
+		tips.put(SquatScorer.HIP_KNEE_RATE, new String[]{
+			"Make sure your hips do not rise faster than your shoulders.",
+			"Try not to straighten your legs too early.",
+			"Try not to straighten your legs before your back.",
+			"Try to extend the hips at at least the same rate as the knees.",
+			"Make sure your knee and hip extension is synchronised."
+		});
 	}
 	
 	public static void speak(int rep, double score, String contributor) {

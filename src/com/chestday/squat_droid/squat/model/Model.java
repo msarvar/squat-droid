@@ -26,4 +26,6 @@ public interface Model {
 	public boolean isSquatBackAngleInOptimalRange();
 	public boolean isSquatWeightForward();
 	public boolean isSquatWeightBackward();
+	public double getAcuteHipAngle();
+	public double getAcuteKneeAngle();
 }

@@ -23,6 +23,7 @@ public class SquatScorer {
 	public static final String FOOT_PLACEMENT = "Foot Placement";
 	public static final String ABOVE_PARALLEL = "Above Parallel";
 	public static final String NO_LOCKOUT = "No Lockout";
+	public static final String HIP_KNEE_RATE = "Knee/Hip Flexion Rate";
 	
 	private BadFrameCounter badFrameCounter;
 	private FrameCounter frameCounter;
@@ -58,6 +59,7 @@ public class SquatScorer {
 		contributors.put(KNEES_FORWARD, 0);
 		contributors.put(KNEES_BACKWARD, 0);
 		contributors.put(FOOT_PLACEMENT, 0);
+		contributors.put(HIP_KNEE_RATE, 0);
 		
 		// Assume didn't squat below parallel or lockout
 		contributors.put(ABOVE_PARALLEL, Integer.MAX_VALUE);
@@ -76,18 +78,11 @@ public class SquatScorer {
 		maxPenalties.put(FOOT_PLACEMENT, 0.10);
 		maxPenalties.put(ABOVE_PARALLEL, 0.30);
 		maxPenalties.put(NO_LOCKOUT, 0.30);
+		maxPenalties.put(HIP_KNEE_RATE, 0.6); // High percentage as can only affect upward movement, while knee angle increasing
 	}
 	
 	private class BadFrameCounter implements ModelEventListener {
 		public void onEvent(Model m) {
-			if(m.isSquatWeightForward()) {
-				contributors.put(WEIGHT_DISTRIBUTION_FORWARD, contributors.get(WEIGHT_DISTRIBUTION_FORWARD) + 1);
-			}
-			
-			if(m.isSquatWeightBackward()) {
-				contributors.put(WEIGHT_DISTRIBUTION_BACKWARD, contributors.get(WEIGHT_DISTRIBUTION_BACKWARD) + 1);
-			}
-			
 			if(!m.isSquatBackAngleInOptimalRange()) {
 				contributors.put(BAD_BACK_ANGLE, contributors.get(BAD_BACK_ANGLE) + 1);
 			}
@@ -98,6 +93,19 @@ public class SquatScorer {
 			
 			if(m.isSquatKneeBackward()) {
 				contributors.put(KNEES_BACKWARD, contributors.get(KNEES_BACKWARD) + 1);
+			}
+			
+			if(!modelEventManager.getHipKneeTracker().isHipKneeRateCorrect()) {
+				contributors.put(HIP_KNEE_RATE,  contributors.get(HIP_KNEE_RATE) + 1);
+			} else {
+				// Weight distribution checks if it is not due to hip/knee rate
+				if(m.isSquatWeightForward()) {
+					contributors.put(WEIGHT_DISTRIBUTION_FORWARD, contributors.get(WEIGHT_DISTRIBUTION_FORWARD) + 1);
+				}
+				
+				if(m.isSquatWeightBackward()) {
+					contributors.put(WEIGHT_DISTRIBUTION_BACKWARD, contributors.get(WEIGHT_DISTRIBUTION_BACKWARD) + 1);
+				}
 			}
 		}
 	}

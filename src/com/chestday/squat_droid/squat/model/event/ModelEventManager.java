@@ -3,6 +3,7 @@ package com.chestday.squat_droid.squat.model.event;
 import java.util.List;
 
 import com.chestday.squat_droid.squat.model.Model;
+import com.chestday.squat_droid.squat.tracking.SquatHipKneeTracker;
 import com.chestday.squat_droid.squat.tracking.SquatPhaseTracker;
 import com.chestday.squat_droid.squat.utils.MultiMap;
 
@@ -12,6 +13,7 @@ public class ModelEventManager {
 	
 	private Model model;
 	private SquatPhaseTracker tracker;
+	private SquatHipKneeTracker hipKneeTracker;
 	
 	private ModelEventManagerStateSwitch squatBelowParallel =
 			new ModelEventManagerStateSwitch(
@@ -55,6 +57,7 @@ public class ModelEventManager {
 	
 	public ModelEventManager() {
 		tracker = new SquatPhaseTracker(5);
+		hipKneeTracker = new SquatHipKneeTracker(this);
 	}
 	
 	public void update(Model model) {
@@ -81,6 +84,7 @@ public class ModelEventManager {
 		
 		tracker.add(model.getVerticalHipPosition());
 		squatPhase.update(tracker.isDescending(), tracker.isAscending());
+		hipKneeTracker.update(model);
 	}
 	
 	public void addListener(ModelEventType type, ModelEventListener listener) {
@@ -91,9 +95,13 @@ public class ModelEventManager {
 		listeners.remove(type, listener);
 	}
 	
+	public SquatHipKneeTracker getHipKneeTracker() {
+		return hipKneeTracker;
+	}
+	
 	private boolean squatBadForm(Model model) {
 		return model.isSquatKneeForward() || model.isSquatKneeBackward() ||
-				!model.isSquatWeightOverFeet();
+				!model.isSquatWeightOverFeet() || !hipKneeTracker.isHipKneeRateCorrect();
 	}
 	
 	private void callListeners(ModelEventType type, Model model) {

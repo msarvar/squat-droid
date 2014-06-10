@@ -261,4 +261,14 @@ public class AngularModel implements Model {
 		Point[] points = calculatePoints();
 		return points[HIP_KNEE].y;
 	}
+
+	@Override
+	public double getAcuteHipAngle() {
+		return 180 - angles[HIP_KNEE] + angles[SHOULDER_HIP];
+	}
+
+	@Override
+	public double getAcuteKneeAngle() {
+		return angles[KNEE_ANKLE] + 180 - angles[HIP_KNEE];
+	}
 }
