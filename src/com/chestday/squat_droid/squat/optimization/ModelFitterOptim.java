@@ -13,6 +13,8 @@ import org.opencv.core.Mat;
 import com.chestday.squat_droid.squat.model.Model;
 
 public class ModelFitterOptim implements ModelFitter {
+	private static final int MAX_EVALUATIONS = 20;
+	
 	public void fit(Model model, Mat frame) {
 		ModelFitFunction fitFunction = new ModelFitFunction(frame, model);
 		
@@ -21,7 +23,7 @@ public class ModelFitterOptim implements ModelFitter {
 		try {
 			PointValuePair p = optim.optimize(
 					new InitialGuess(model.get()),
-					new MaxEval(5000),
+					new MaxEval(MAX_EVALUATIONS),
 					GoalType.MINIMIZE,
 					new ObjectiveFunction(fitFunction),
 					new SimpleBounds(model.getLowerBounds(), model.getUpperBounds())

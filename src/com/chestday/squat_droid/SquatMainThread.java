@@ -37,7 +37,7 @@ public class SquatMainThread extends Thread {
 		listener.onInitialised();
 		
 		// This loop is for activating/deactivating the button - wait for still background
-		BackgroundSubtractor bg = new BackgroundSubtractorOpenCV(0.05, 10);
+		BackgroundSubtractor bg = new BackgroundSubtractorOpenCV(0.01, 50);
 
 		while(!listener.isStartButtonPressed() && videoInput.hasNextFrame()) {
 			videoInput.getNextFrame(frame);

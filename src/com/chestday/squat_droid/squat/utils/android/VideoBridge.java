@@ -48,16 +48,16 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 
 	@Override
 	public synchronized void getNextFrame(Mat frame) {
-		while(inputFrame == null) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+//		while(inputFrame == null) {
+//			try {
+//				wait();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		
 		inputFrame.copyTo(frame);
-		inputFrame = null;
+		//inputFrame = null;
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	}
 
 	@Override
-	public void show(Mat m) {
+	public synchronized void show(Mat m) {
 		m.copyTo(outputFrame);
 	}
 
@@ -100,7 +100,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	private boolean started = false;
 	
 	@Override
-	public Mat onCameraFrame(CvCameraViewFrame inputFrame) {		
+	public Mat onCameraFrame(CvCameraViewFrame inputFrame) {	
 		Mat m = MatManager.get("video_bridge_m");
 		
 		inputFrame.rgba().convertTo(m, CvType.CV_8UC1);
@@ -111,7 +111,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 		
 		synchronized (this) {
 			this.inputFrame = m;
-			notify();
+			//notify();
 		}
 		
 		Mat out = MatManager.get("video_bridge_out");
