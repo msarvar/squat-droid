@@ -109,11 +109,8 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 			Core.flip(m, m, 1);
 		}
 		
-		//synchronized (this) {
-			this.inputFrame = m;
-			//notify();
-		//}
-		
+		this.inputFrame = m;
+
 		Mat out = MatManager.get("video_bridge_out");
 		this.outputFrame.convertTo(out, 24);
 
