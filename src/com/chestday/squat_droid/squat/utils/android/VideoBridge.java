@@ -100,7 +100,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	private boolean started = false;
 	
 	@Override
-	public Mat onCameraFrame(CvCameraViewFrame inputFrame) {	
+	public synchronized Mat onCameraFrame(CvCameraViewFrame inputFrame) {	
 		Mat m = MatManager.get("video_bridge_m");
 		
 		inputFrame.rgba().convertTo(m, CvType.CV_8UC1);
@@ -109,10 +109,10 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 			Core.flip(m, m, 1);
 		}
 		
-		synchronized (this) {
+		//synchronized (this) {
 			this.inputFrame = m;
 			//notify();
-		}
+		//}
 		
 		Mat out = MatManager.get("video_bridge_out");
 		this.outputFrame.convertTo(out, 24);
