@@ -6,7 +6,7 @@ import com.chestday.squat_droid.SquatPreferences;
 import com.chestday.squat_droid.squat.tracking.SquatPipelineListener;
 
 public class MotionDetector {
-	private static final int FRAME_SKIP = 3;
+	private static final int FRAME_SKIP = 20;
 	private int NUM_DIFFERENCES = 8;
 	private double MOTION_THRESHOLD = 2;
 	
@@ -18,7 +18,7 @@ public class MotionDetector {
 	
 	public MotionDetector(Mat initialFrame, SquatPipelineListener listener) {
 		MOTION_THRESHOLD = SquatPreferences.getDoubleValue("motion_threshold");
-		NUM_DIFFERENCES = SquatPreferences.getIntValue("num_differences") * 2;
+		NUM_DIFFERENCES = SquatPreferences.getIntValue("num_differences");
 		
 		prev = initialFrame;
 		differences = new FixedQueue<Double>(NUM_DIFFERENCES);
