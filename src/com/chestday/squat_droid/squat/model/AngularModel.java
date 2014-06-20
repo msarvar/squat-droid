@@ -56,8 +56,8 @@ public class AngularModel implements Model {
 	
 	private void initialiseLengths() {
 		lengths[HEAD_SHOULDER] = 10;//20;
-		lengths[SHOULDER_HIP] = 39;//78;
-		lengths[HIP_KNEE] = 27.5;//55;
+		lengths[SHOULDER_HIP] = 38;//78;
+		lengths[HIP_KNEE] = 26.5;//55;
 		lengths[KNEE_ANKLE] = 26;//52;
 		lengths[ANKLE_TOE] = 10;//20;
 	}
