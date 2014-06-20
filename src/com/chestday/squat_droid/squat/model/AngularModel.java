@@ -23,6 +23,7 @@ public class AngularModel implements Model {
 	private static final int DEGREES_OF_FREEDOM = NUM_JOINTS;
 	
 	private double scale = 1;
+	private double weightRadius = 15;
 	
 	// The position of the toe is fixed.
 	private Point foot;// = new Point(105, 280);
@@ -40,6 +41,7 @@ public class AngularModel implements Model {
 		initialiseLengths();
 		initialiseAngles();
 		drawWeight = SquatPreferences.getBooleanValue("with_weight");
+		weightRadius = SquatPreferences.getIntValue("weight_radius");
 	}
 	
 	public void setScale(double scale) {
@@ -148,7 +150,7 @@ public class AngularModel implements Model {
 		
 		// Draw the bar on the lifter's back
 		if(drawWeight) {
-			Core.circle(m, points[SHOULDER_HIP], (int)(15 * scale), colour, -1);
+			Core.circle(m, points[SHOULDER_HIP], (int)(weightRadius * scale), colour, -1);
 		}
 		
 		// Draw a small circle for the butt!

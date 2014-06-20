@@ -28,6 +28,16 @@
             	android:summary="Check this if you are squatting with a barbell with plates on your back."
         		android:defaultValue="true"
             />
+        
+        <ListPreference 
+            	android:key="weight_radius"
+            	android:title="Weight Size"
+            	android:summary="The size of the weight on the end of the barbell."
+        		android:defaultValue="15"
+        		android:entries="@array/weightRadius"
+        		android:entryValues="@array/weightRadiusValues"
+        		android:dependency="with_weight"
+            />
         		
     </PreferenceCategory>
     

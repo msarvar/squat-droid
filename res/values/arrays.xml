@@ -47,6 +47,16 @@
         <item name="2">2</item>
     </string-array>
     
+    <string-array name="weightRadius">
+        <item name="20">20kg</item>
+        <item name="10">10kg</item>
+    </string-array>
+    
+    <string-array name="weightRadiusValues">
+        <item name="20">15</item>
+        <item name="10">13</item>
+    </string-array>
+    
     <string-array name="backgroundThreshold">
         <item name="10">Very High</item>
         <item name="20">High</item>
