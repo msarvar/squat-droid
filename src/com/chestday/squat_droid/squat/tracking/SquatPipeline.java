@@ -17,6 +17,7 @@ import com.chestday.squat_droid.squat.model.event.ModelEventType;
 import com.chestday.squat_droid.squat.optimization.ModelFitter;
 import com.chestday.squat_droid.squat.optimization.ModelInitialisationFitterOptim;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractor;
+import com.chestday.squat_droid.squat.utils.BackgroundSubtractorCentreLine;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorLargestObject;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaive;
 import com.chestday.squat_droid.squat.utils.BackgroundSubtractorNaiveShadow;

@@ -1,6 +1,8 @@
 package com.chestday.squat_droid.squat.utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.opencv.core.Core;
@@ -49,6 +51,26 @@ public class VideoTools {
 		Mat diff = new Mat(m1.size(), m1.type());
 		Core.bitwise_and(m2, nm1, diff);
 		return Core.countNonZero(diff);
+	}
+	
+	public static List<MatOfPoint> largestObjects(Mat frame) {
+		List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+		frame.convertTo(frame, CvType.CV_8UC3);
+		Imgproc.findContours(frame, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+		
+		Collections.sort(contours, new Comparator<MatOfPoint>() {
+
+			@Override
+			public int compare(MatOfPoint l, MatOfPoint r) {
+				double a = Imgproc.contourArea(l);
+				double b = Imgproc.contourArea(r);
+				
+				return a > b ? -1 : a < b ? 1 : 0;
+			}
+			
+		});
+		
+		return contours;
 	}
 	
 	public static MatOfPoint largestObject(Mat frame) {
