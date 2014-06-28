@@ -17,7 +17,7 @@ import org.opencv.core.Mat;
 import com.chestday.squat_droid.squat.model.Model;
 
 public class ModelFitterOptim implements ModelFitter {
-	private static final int MAX_EVALUATIONS = 30;
+	private static final int MAX_EVALUATIONS = 25;
 	
 	public void fit(Model model, Mat frame) {
 		ModelFitFunction fitFunction = new ModelFitFunction(frame, model);
