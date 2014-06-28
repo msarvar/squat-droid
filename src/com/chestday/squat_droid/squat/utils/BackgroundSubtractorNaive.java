@@ -11,9 +11,11 @@ import org.opencv.imgproc.Imgproc;
 public class BackgroundSubtractorNaive implements BackgroundSubtractor {
 
 	List<Mat> background = new ArrayList<Mat>();
+	Mat backgroundMat;
 	double threshold;
 	
 	public BackgroundSubtractorNaive(Mat background, double threshold) {
+		backgroundMat = background;
 		Core.split(background, this.background);
 		this.threshold = threshold;
 	}
@@ -32,6 +34,15 @@ public class BackgroundSubtractorNaive implements BackgroundSubtractor {
 			Imgproc.threshold(results.get(i), results.get(i), threshold, 255, Imgproc.THRESH_BINARY);
 			Core.bitwise_or(subtracted, results.get(i), subtracted);
 		}
+	}
+	
+	public void setBackground(Mat newBackground) {
+		backgroundMat = newBackground;
+		Core.split(newBackground, background);
+	}
+	
+	public Mat getBackground() {
+		return backgroundMat;
 	}
 
 }
