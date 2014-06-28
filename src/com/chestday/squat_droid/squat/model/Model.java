@@ -12,6 +12,7 @@ public interface Model {
 	public void setScale(double scale);
 	public double[] getInitParams();
 	public double[] get();
+	public double[] getMidSquatPose();
 	public double[] getUpperBounds();
 	public double[] getLowerBounds();
 	

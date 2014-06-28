@@ -273,4 +273,15 @@ public class AngularModel implements Model {
 	public double getAcuteKneeAngle() {
 		return angles[KNEE_ANKLE] + 180 - angles[HIP_KNEE];
 	}
+
+	@Override
+	public double[] getMidSquatPose() {
+		double[] pose = new double[DEGREES_OF_FREEDOM];
+		pose[ANKLE_TOE] = 180;
+		pose[KNEE_ANKLE] = 90;
+		pose[HIP_KNEE] = 135;
+		pose[SHOULDER_HIP] = 45;
+		pose[HEAD_SHOULDER] = 90;
+		return pose;
+	}
 }
