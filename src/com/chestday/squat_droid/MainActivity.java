@@ -357,6 +357,7 @@ public class MainActivity extends ActionBarActivity {
 		super.onDestroy();
 		//Debug.stopMethodTracing();
 		Speaker.shutdown();
+		System.exit(0);
 	}
 
 	@Override
