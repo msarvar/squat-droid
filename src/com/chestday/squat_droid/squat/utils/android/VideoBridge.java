@@ -5,6 +5,8 @@ import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
 
 import com.chestday.squat_droid.squat.utils.MatManager;
 import com.chestday.squat_droid.squat.utils.VideoDisplay;
@@ -20,6 +22,8 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	
 	private int width;
 	private int height;
+	private int origWidth;
+	private int origHeight;
 	
 	private int direction = LEFT_FACING;
 	
@@ -87,9 +91,11 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 
 	@Override
 	public void onCameraViewStarted(int width, int height) {
-		this.width = width;
-		this.height = height;
-		outputFrame = MatManager.get("video_bridge_output_frame", height, width, CvType.CV_8UC1);
+		this.origWidth = width;
+		this.origHeight = height;
+		this.width = 170;
+		this.height = 120;
+		outputFrame = MatManager.get("video_bridge_output_frame", this.height, this.width, CvType.CV_8UC1);
 	}
 
 	@Override
@@ -109,10 +115,17 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 			Core.flip(m, m, 1);
 		}
 		
-		this.inputFrame = m;
+		Mat smallM = MatManager.get("video_bridge_small_m");
+		System.out.println("SQUAT: m: w" + m.size().width + " h: " + m.size().height);
+		Imgproc.resize(m, smallM, new Size(this.height, this.width));
+
+		this.inputFrame = smallM;
 
 		Mat out = MatManager.get("video_bridge_out");
-		this.outputFrame.convertTo(out, 24);
+		Mat bigOut = MatManager.get("video_bridge_big_out");
+		
+		Imgproc.resize(this.outputFrame, bigOut, m.size());
+		bigOut.convertTo(out, 24);
 
 
 		if(direction == RIGHT_FACING) {

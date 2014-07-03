@@ -70,8 +70,8 @@ public class MainActivity extends ActionBarActivity {
 	private void start() {
 		mOpenCvCameraView = (PortraitCameraView) findViewById(R.id.camera_view);
 		mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
-		//mOpenCvCameraView.setMaxFrameSize(320, 240);
-		mOpenCvCameraView.setMaxFrameSize(176, 152);
+		mOpenCvCameraView.setMaxFrameSize(320, 240);
+		//mOpenCvCameraView.setMaxFrameSize(176, 152);
 		
 		mainTextView = (TextView)findViewById(R.id.main_text);
 		
