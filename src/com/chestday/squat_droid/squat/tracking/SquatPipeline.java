@@ -51,16 +51,16 @@ public class SquatPipeline {
 			videoInput.getNextFrame(firstFrame);
 		}
 
-		int bgThreshold = SquatPreferences.getIntValue("background_threshold");
+		int bgThreshold = SquatPreferences.getIntValue("background_threshold", 30);
 		
 		BackgroundSubtractor bg;
-		if(SquatPreferences.getBooleanValue("remove_shadows")) {
+		if(SquatPreferences.getBooleanValue("remove_shadows", true)) {
 			bg = new BackgroundSubtractorNaiveShadow(firstFrame, bgThreshold);
 		} else {
 			bg = new BackgroundSubtractorNaive(firstFrame, bgThreshold);
 		}
 		
-		if(SquatPreferences.getBooleanValue("largest_object")) {
+		if(SquatPreferences.getBooleanValue("largest_object", true)) {
 			bg = new BackgroundSubtractorLargestObject(firstFrame, bg);
 		}
 		
@@ -169,7 +169,7 @@ public class SquatPipeline {
 		SquatTracker squatTracker = new SquatTracker(model, modelEventManager, bg);
 		squatTracker.start();
 		
-		int displayMode = SquatPreferences.getIntValue("display_mode");
+		int displayMode = SquatPreferences.getIntValue("display_mode", DISPLAY_MODE_NORMAL_VIDEO);
 
 		Mat frame = MatManager.get("pipeline_main_frame");
 		// Main loop

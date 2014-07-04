@@ -40,8 +40,8 @@ public class AngularModel implements Model {
 		initialiseWidths();
 		initialiseLengths();
 		initialiseAngles();
-		drawWeight = SquatPreferences.getBooleanValue("with_weight");
-		weightRadius = SquatPreferences.getIntValue("weight_radius");
+		drawWeight = SquatPreferences.getBooleanValue("with_weight", true);
+		weightRadius = SquatPreferences.getIntValue("weight_radius", 15);
 	}
 	
 	public void setScale(double scale) {

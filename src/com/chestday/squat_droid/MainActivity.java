@@ -100,7 +100,7 @@ public class MainActivity extends ActionBarActivity {
 					videoBridge.setDirection(VideoBridge.RIGHT_FACING);
 					flipButton.setImageResource(R.drawable.squat_right_blue);
 					
-					if(SquatPreferences.getBooleanValue("vocal_instructions")) {
+					if(SquatPreferences.getBooleanValue("vocal_instructions", true)) {
 						Speaker.speak("Face right.");
 					}
 				} else {
@@ -108,7 +108,7 @@ public class MainActivity extends ActionBarActivity {
 					videoBridge.setDirection(VideoBridge.LEFT_FACING);
 					flipButton.setImageResource(R.drawable.squat_left_blue);
 					
-					if(SquatPreferences.getBooleanValue("vocal_instructions")) {
+					if(SquatPreferences.getBooleanValue("vocal_instructions", true)) {
 						Speaker.speak("Face left.");
 					}
 				}
@@ -172,7 +172,7 @@ public class MainActivity extends ActionBarActivity {
 				setText(mainTextView, "Walk into view");
 				setText(startButton, "Started");
 				setStartButtonEnabled(false);
-				if(SquatPreferences.getBooleanValue("vocal_instructions")) {
+				if(SquatPreferences.getBooleanValue("vocal_instructions", true)) {
 					Speaker.speak("Walk into view and stand still, facing " + (videoBridge.getDirection() == VideoBridge.LEFT_FACING ? "left" : "right") + ".");
 				}
 			}
@@ -197,7 +197,7 @@ public class MainActivity extends ActionBarActivity {
 			
 			public void onReadyToSquat() {
 				System.out.println("SQUAT: Ready to Squat!");
-				if(SquatPreferences.getBooleanValue("sound") && SquatPreferences.getBooleanValue("detect_beep")) {
+				if(SquatPreferences.getBooleanValue("sound", true) && SquatPreferences.getBooleanValue("detect_beep", true)) {
 					toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK);
 				}
 			}
@@ -205,14 +205,14 @@ public class MainActivity extends ActionBarActivity {
 			public void onInitialModelFit() {
 				System.out.println("SQUAT: Initial Model Fitted");
 				setText(mainTextView, "Squat!");
-				if(SquatPreferences.getBooleanValue("vocal_instructions")) {
+				if(SquatPreferences.getBooleanValue("vocal_instructions", true)) {
 					Speaker.speak("Start squatting when ready!");
 				}
 			}
 			
 			@Override
 			public void onSquatBelowParallel() {
-				if(SquatPreferences.getBooleanValue("sound") && SquatPreferences.getBooleanValue("parallel_beep")) {
+				if(SquatPreferences.getBooleanValue("sound", true) && SquatPreferences.getBooleanValue("parallel_beep", true)) {
 					toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK);
 				}
 			}

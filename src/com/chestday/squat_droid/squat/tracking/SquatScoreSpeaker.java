@@ -94,11 +94,11 @@ public class SquatScoreSpeaker {
 	public static void speak(int rep, double score, String contributor) {
 		String text = "";
 		
-		if(SquatPreferences.getBooleanValue("count_reps")) {
+		if(SquatPreferences.getBooleanValue("count_reps", true)) {
 			text += rep + ". ";
 		}
 		
-		if(SquatPreferences.getBooleanValue("vocal_feedback")) {
+		if(SquatPreferences.getBooleanValue("vocal_feedback", true)) {
 			if(score < 30) {
 				text += "Not very good.";
 			} else if(score < 50) {

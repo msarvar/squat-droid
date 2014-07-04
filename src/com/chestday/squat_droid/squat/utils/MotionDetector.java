@@ -17,8 +17,8 @@ public class MotionDetector {
 	private SquatPipelineListener listener;
 	
 	public MotionDetector(Mat initialFrame, SquatPipelineListener listener) {
-		MOTION_THRESHOLD = SquatPreferences.getDoubleValue("motion_threshold");
-		NUM_DIFFERENCES = SquatPreferences.getIntValue("num_differences");
+		MOTION_THRESHOLD = SquatPreferences.getDoubleValue("motion_threshold", 2);
+		NUM_DIFFERENCES = SquatPreferences.getIntValue("num_differences", 8);
 		
 		prev = initialFrame;
 		differences = new FixedQueue<Double>(NUM_DIFFERENCES);

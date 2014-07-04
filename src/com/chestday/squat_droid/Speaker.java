@@ -25,7 +25,7 @@ public class Speaker implements OnInitListener {
 	}
 	
 	public static void speak(final String text) {
-		boolean sound = SquatPreferences.getBooleanValue("sound");
+		boolean sound = SquatPreferences.getBooleanValue("sound", true);
 		
 		if(self.ready && sound) {
 			self.tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);

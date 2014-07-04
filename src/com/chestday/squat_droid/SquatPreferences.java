@@ -17,19 +17,19 @@ public class SquatPreferences {
 		self = new SquatPreferences(context);
 	}
 	
-	public static String getStringValue(String key) {
-		return self.sharedPreferences.getString(key, "NULL");
+	public static String getStringValue(String key, String defaultValue) {
+		return self.sharedPreferences.getString(key, defaultValue);
 	}
 	
-	public static int getIntValue(String key) {
-		return Integer.parseInt(self.sharedPreferences.getString(key, "0"));
+	public static int getIntValue(String key, int defaultValue) {
+		return Integer.parseInt(self.sharedPreferences.getString(key, Integer.toString(defaultValue)));
 	}
 	
-	public static double getDoubleValue(String key) {
-		return Double.parseDouble(self.sharedPreferences.getString(key, "0"));
+	public static double getDoubleValue(String key, double defaultValue) {
+		return Double.parseDouble(self.sharedPreferences.getString(key, Double.toString(defaultValue)));
 	}
 	
-	public static boolean getBooleanValue(String key) {
-		return self.sharedPreferences.getBoolean(key, false);
+	public static boolean getBooleanValue(String key, boolean defaultValue) {
+		return self.sharedPreferences.getBoolean(key, defaultValue);
 	}
 }
