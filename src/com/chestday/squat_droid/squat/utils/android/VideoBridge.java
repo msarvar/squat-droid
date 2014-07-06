@@ -22,8 +22,6 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	
 	private int width;
 	private int height;
-	private int origWidth;
-	private int origHeight;
 	
 	private int direction = LEFT_FACING;
 	
@@ -91,8 +89,6 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 
 	@Override
 	public void onCameraViewStarted(int width, int height) {
-		this.origWidth = width;
-		this.origHeight = height;
 		this.width = 170;
 		this.height = 120;
 		outputFrame = MatManager.get("video_bridge_output_frame", this.height, this.width, CvType.CV_8UC1);
