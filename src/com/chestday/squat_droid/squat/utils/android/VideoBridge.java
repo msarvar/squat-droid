@@ -26,6 +26,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 	private int direction = LEFT_FACING;
 	
 	private VideoBridgeReadyCallback vbrc;
+	private boolean newFrame = true;
 	
 	public VideoBridge() {
 		inputFrame = new Mat();
@@ -59,7 +60,12 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 //		}
 		
 		inputFrame.copyTo(frame);
+		newFrame = false;
 		//inputFrame = null;
+	}
+	
+	public boolean isNewFrame() {
+		return newFrame;
 	}
 
 	@Override
@@ -116,6 +122,7 @@ public class VideoBridge implements VideoDisplay, VideoInput, CvCameraViewListen
 		Imgproc.resize(m, smallM, new Size(this.height, this.width));
 
 		this.inputFrame = smallM;
+		newFrame = true;
 
 		Mat out = MatManager.get("video_bridge_out");
 		Mat bigOut = MatManager.get("video_bridge_big_out");

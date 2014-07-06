@@ -67,10 +67,12 @@ public class SquatPipeline {
 		SquatSetup squatSetup = new SquatSetup(bg, firstFrame, listener);
 		Mat readyFrame = MatManager.get("pipeline_ready_frame");
 		while(!squatSetup.ready() && videoInput.hasNextFrame()) {
-			videoInput.getNextFrame(readyFrame);
-			videoDisplay.show(readyFrame);
-			videoDisplay.draw();
-			squatSetup.update(readyFrame);
+			if(videoInput.isNewFrame()) {
+				videoInput.getNextFrame(readyFrame);
+				videoDisplay.show(readyFrame);
+				videoDisplay.draw();
+				squatSetup.update(readyFrame);
+			}
 		}
 		
 		listener.onReadyToSquat();

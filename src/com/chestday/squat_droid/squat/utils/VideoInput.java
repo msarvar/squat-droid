@@ -7,6 +7,8 @@ public interface VideoInput {
 	
 	public void getNextFrame(Mat m);
 	
+	public boolean isNewFrame();
+	
 	public int getWidth();
 	
 	public int getHeight();
