@@ -5,6 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/squat_blue_dark"
     android:keepScreenOn="true"
-    tools:context="com.chestday.squat_droid.MainActivity"
+    tools:context="com.chestday.squat_droid_free.MainActivity"
     tools:ignore="MergeRootFrame" />
 
